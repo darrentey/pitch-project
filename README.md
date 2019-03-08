@@ -1,1 +1,1 @@
-# flask-pitch-project
+# pitch-project

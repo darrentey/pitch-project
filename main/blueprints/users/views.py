@@ -3,8 +3,7 @@ from models.user import User
 from forms import RegistrationForm
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,LoginManager,login_required,logout_user,login_user,current_user
-from models.preference import Preference
-import json
+
 # app.config['SECRET_KEY'] = '6c2895efeef56653c22f29249bb29924'
 
 users_blueprint = Blueprint('users',
@@ -26,11 +25,3 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
     return render_template('signup.html', title='Register', form=form)
-
-@users_blueprint.route("/dashboard", methods=['GET'])
-def dashboard():
-    results = []
-    tech = Preference.get(id=1)
-    for article in tech.articles:
-        results.append(json.loads(article))
-    return render_template('show.html',results=results)

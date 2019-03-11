@@ -12,12 +12,12 @@ assets.register(bundles)
 
 from main.blueprints.users.views import users_blueprint
 from main.blueprints.sessions.views import sessions_blueprint
+from main.blueprints.preferences.views import preferences_blueprint
 app.register_blueprint(users_blueprint, url_prefix="/users")
 app.register_blueprint(sessions_blueprint, url_prefix="/sessions")
-# from instagram_web.blueprints.images.views import images_blueprint
-# from instagram_web.blueprints.checkouts.views import checkouts_blueprint
+app.register_blueprint(preferences_blueprint, url_prefix="/preferences")
+# from main.blueprints.images.views import images_blueprint
 # app.register_blueprint(images_blueprint, url_prefix="/images")
-# app.register_blueprint(checkouts_blueprint, url_prefix="/checkouts")
 
 # from models.image import Image
 # from flask_login import current_user

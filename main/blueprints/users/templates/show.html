@@ -1,0 +1,14 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+{% for result in results %}
+<div>
+    <a href="{{result['link']}}">
+        <p>{{result['title']}}</p>
+        <img src="{{result['image']}}" />
+    </a>
+</div>
+   
+{% endfor %}
+
+{% endblock %}

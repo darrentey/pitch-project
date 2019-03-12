@@ -6,7 +6,7 @@ import json
 beauty_result=[]
 
 def scrape_b1():
-    soup = BeautifulSoup(urlopen('https://www.elle.com/beauty'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.elle.com/beauty'),'html.parser')
     url = 'https://www.elle.com'
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):
@@ -18,7 +18,7 @@ def scrape_b1():
                 }))
 
 def scrape_b2():
-    soup = BeautifulSoup(urlopen('https://www.instyle.com/beauty'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.instyle.com/beauty'), 'html.parser')
     url = 'https://www.instyle.com'
     for article in soup.find_all('article',class_='component tile media image-top type-article'):
         for img in article.find_all('div',class_='component lazy-image thumbnail'):
@@ -31,7 +31,7 @@ def scrape_b2():
                 }))
 
 def scrape_b3():
-    soup = BeautifulSoup(urlopen('https://intothegloss.com/sections/skincare/'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://intothegloss.com/sections/skincare/'), 'html.parser')
     url = 'https://intothegloss.com'
     for div in soup.find_all('div', class_='l-row--full m-posts-item m-posts-item--'):
         for img in div.find_all('div', class_='m-img-lazy'):
@@ -44,7 +44,7 @@ def scrape_b3():
                 }))
 
 def scrape_b4():
-    soup = BeautifulSoup(urlopen('https://fashionmagazine.com/beauty'),'lxml')
+    soup = BeautifulSoup(urlopen('https://fashionmagazine.com/beauty'),'html.parser')
     for article in soup.find_all('article',class_='post-preview--portrait'):
         for div in article.find_all('div',class_='post-preview--portrait__header-wrap'):
             for a in div.find_all('a'):
@@ -66,7 +66,7 @@ def scrape_b4():
         beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
 def scrape_b5():
-    soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/grooming'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/grooming'),'html.parser')
     url = 'https://www.gq-magazine.co.uk'
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
@@ -81,7 +81,7 @@ def scrape_b5():
         beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
 def scrape_b6():
-    soup = BeautifulSoup(urlopen('https://www.vogue.co.uk/topic/beauty'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.vogue.co.uk/topic/beauty'),'html.parser')
     url = 'https://www.vogue.co.uk'
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
@@ -96,7 +96,7 @@ def scrape_b6():
         beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
 def scrape_b7():
-    soup = BeautifulSoup(urlopen('https://www.glamourmagazine.co.uk/topic/beauty-news'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.glamourmagazine.co.uk/topic/beauty-news'),'html.parser')
     url = 'https://www.glamourmagazine.co.uk'
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
@@ -112,7 +112,7 @@ def scrape_b7():
 
 # need to fix image
 def scrape_b8():
-    soup = BeautifulSoup(urlopen('https://www.self.com/beauty'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.self.com/beauty'),'html.parser')
     url = 'https://www.self.com/'
     for li in soup.find_all('li',class_='component-river-item'):
         # for img in li.find_all('picture',class_='component-responsive-image'):
@@ -124,7 +124,7 @@ def scrape_b8():
                 }))
 
 def scrape_b9():
-    soup = BeautifulSoup(urlopen('https://www.harpersbazaar.com/uk/beauty/'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.harpersbazaar.com/uk/beauty/'),'html.parser')
     url = 'https://www.harpersbazaar.com/uk/'
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):
@@ -136,7 +136,7 @@ def scrape_b9():
                 }))
 
 def scrape_b10():
-    soup = BeautifulSoup(urlopen('https://www.cosmopolitan.com/uk/beauty-hair'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.cosmopolitan.com/uk/beauty-hair'),'html.parser')
     url = 'https://www.cosmopolitan.com/uk'
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):

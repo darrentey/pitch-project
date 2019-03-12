@@ -63,20 +63,20 @@ def scrape_f4():
                 title = span
         fashion_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
-# lazyload problem,unable to get image
 def scrape_f5():
-    soup = BeautifulSoup(urlopen('https://www.wmagazine.com/fashion'),'html.parser')
-    url = 'https://www.wmagazine.com'
-    for li in soup.find_all('li',class_='component-river-item'):
-        for div in li.find_all('div',class_='feature-item-image'):
-            for div3 in div.find_all('div',class_='component-lazy'):
-                for picture in div.find_all('picture',class_='river-image'):
-                    image = picture.find_all('source')
-        for div2 in li.find_all('div',class_='feature-item-content'):
-            for a in div2.find_all('a',class_='feature-item-link'):
-                link = url+a.get('href')
-                title = a.get_text()
-        fashion_result.append(json.dumps({'title':title,'link':link,'image':''}))
+    soup = BeautifulSoup(urlopen('https://www.glamourmagazine.co.uk/topic/fashion-trends'),'html.parser')
+    url = 'https://www.glamourmagazine.co.uk'
+    for li in soup.find_all('li',class_='c-card-section__card-listitem'):
+        for article in li.find_all('article',class_='c-card--tg-article'):
+            link = url+article.find('a')['href']
+        for div in li.find_all('div',class_='c-card__image--square'):
+            for img in div.find_all('img'):
+                if img.get('data-src'):
+                    image = img.get('data-src')
+        for div in li.find_all('div',class_='c-card__header'):
+            for span in div.find('span'):
+                title = span
+        fashion_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
 def scrape_f6():
     soup = BeautifulSoup(urlopen('https://www.yesstyle.com/blog/category/trend-and-style'),'html.parser')

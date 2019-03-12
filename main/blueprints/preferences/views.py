@@ -4,6 +4,7 @@ import json
 from main.util.fashion import *
 from main.util.tech import *
 from main.util.beauty import *
+from main.util.lifestyle import *
 from models.user_preference import User_Preference
 from flask_login import current_user
 from main.util.general import *
@@ -62,6 +63,21 @@ def beauty_job():
     scrape_b9()
     scrape_b10()
     Preference.update(articles=beauty_result).where(Preference.categories=='Beauty').execute()
+    return redirect(url_for('home'))
+
+@preferences_blueprint.route("/lifestyle")
+def lifestyle_job():
+    scrape_l1()
+    scrape_l2()
+    scrape_l3()
+    scrape_l4()
+    scrape_l5()
+    scrape_l6()
+    scrape_l7()
+    scrape_l8()
+    scrape_l9()
+    scrape_l10()
+    Preference.update(articles=lifestyle_result).where(Preference.categories=='Lifestyle').execute()
     return redirect(url_for('home'))
     
 @preferences_blueprint.route("/new/<int:id>",methods=['POST'])

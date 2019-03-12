@@ -10,12 +10,16 @@
     <p>{{result['category']}}</p>
 </div>
 {% endfor %}
+<h3>Instagram tag</h3>
 <ul>
-    {% for tag in insta_tag[:20] %}
-        <li>{{tag}}</li>
-    {% endfor %}
-    {% for tag in twitter_tag[:20] %}
-        <li>{{tag}}</li>
-    {% endfor %}
+{% for tag in insta_tag[:20] %}
+    <li>{{tag}}</li>
+{% endfor %}
+</ul>
+<h3>Twitter tag</h3>
+<ul>
+{% for tag in twitter_tag[:20] %}
+    <li>{{tag}}</li>
+{% endfor %}
 </ul>
 {% endblock %}

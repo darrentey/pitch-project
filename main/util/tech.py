@@ -10,14 +10,13 @@ def scrape_t1():
     soup = BeautifulSoup(urlopen('https://www.businessinsider.my/tech-insider/'),'html.parser')
     for div in soup.find_all('div',class_='td-module-thumb'):
         for a in div.find_all('a'):
-            for img in a.find_all('img'):
-                x = (a.get('title')).strip()
-                title = x.replace("\u2018","'")
-                title = title.replace("\u2019","'")
-                title = title.replace("\u2014","-")
+            for img in a.find_all('img'): 
+                # title = x.replace("\u2018","'")
+                # title = title.replace("\u2019","'")
+                # title = title.replace("\u2014","-")
                 # if not any(link['link'] == a.get('href') for link in tech_result):     
                 tech_result.append(json.dumps({
-                    'title' : title,
+                    'title' : (a.get('title')).strip(),
                     'link' : a.get('href'),
                     'image' : img.get('src')
                 }))

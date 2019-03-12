@@ -61,6 +61,8 @@ def beauty_job():
     scrape_b8()
     scrape_b9()
     scrape_b10()
+    Preference.update(articles=beauty_result).where(Preference.categories=='Beauty').execute()
+    return redirect(url_for('home'))
     
 @preferences_blueprint.route("/new/<int:id>",methods=['POST'])
 def add(id):

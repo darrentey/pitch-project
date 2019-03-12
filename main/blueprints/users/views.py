@@ -49,15 +49,18 @@ def show(username):
         return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
     else:
         results = []
+        p_id =[1,2,3,4]
         preferences = Preference.select().where(Preference.id.in_(p_id))
         for preference in preferences:
             for article in preference.articles:
-                results.append(json.loads(article))
-            shuffle(results)
-            return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
+                json_article = json.loads(article)
+                json_article['category']=preference.categories
+                results.append(json_article)
+        shuffle(results)
+        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
 
-@users_blueprint.route("/edit/<int:id>", methods=['GET'])
-def edit(id):
+@users_blueprint.route("/edit", methods=['GET'])
+def edit():
     p_list = User_Preference.get_or_none(User_Preference.user==current_user.id)
     if p_list:
         p_id = User_Preference.select(User_Preference.preference).where(User_Preference.user==current_user.id)

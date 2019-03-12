@@ -5,7 +5,6 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,LoginManager,login_required,logout_user,login_user,current_user
 from models.preference import Preference
 import json
-# app.config['SECRET_KEY'] = '6c2895efeef56653c22f29249bb29924'
 
 users_blueprint = Blueprint('users',
                             __name__,

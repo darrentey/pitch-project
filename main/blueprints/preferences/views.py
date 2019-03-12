@@ -3,6 +3,7 @@ from models.preference import Preference
 import json
 from main.util.fashion import *
 from main.util.tech import *
+from main.util.beauty import *
 
 preferences_blueprint = Blueprint('preferences',
                             __name__,
@@ -38,4 +39,18 @@ def tech_job():
     scrape_t10()
     Preference.update(articles=tech_result).where(Preference.categories=='Technology').execute()
     return redirect(url_for('home'))
+
+@preferences_blueprint.route("/beauty")
+def beauty_job():
+    scrape_b1()
+    scrape_b2()
+    scrape_b3()
+    scrape_b4()
+    scrape_b5()
+    scrape_b6()
+    scrape_b7()
+    scrape_b8()
+    scrape_b9()
+    scrape_b10()
+    
 

@@ -1,14 +1,21 @@
 {% extends "_layout.html" %}
 
 {% block content %}
-{% for result in results %}
+{% for result in results[:20] %}
 <div>
     <a href="{{result['link']}}">
         <p>{{result['title']}}</p>
         <img src="{{result['image']}}" />
     </a>
+    <p>{{result['category']}}</p>
 </div>
-   
 {% endfor %}
-
+<ul>
+    {% for tag in insta_tag[:20] %}
+        <li>{{tag}}</li>
+    {% endfor %}
+    {% for tag in twitter_tag[:20] %}
+        <li>{{tag}}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

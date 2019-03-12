@@ -4,25 +4,6 @@ import bs4
 import requests
 import json
 
-    # top 50 popular hashtag in Instagram
-    # req=Request("https://top-hashtags.com/instagram/",headers = {'User-Agent': 'Mozilla/5.0'})
-    # soup = BeautifulSoup(urlopen(req), 'html.parser')
-    # insta=[]
-    # for rank in soup.find_all('div',class_='tht-tag'):
-    #     insta.append(rank.text)
-    # i=0
-    # while i < 50:
-    #     print(insta[i])
-    #     i+=1
-
-    # top 20 twitter trending hashtag
-    # soup = BeautifulSoup(urlopen("http://tweeplers.com/hashtags/?cc=WORLD"), 'html.parser')
-    # twitter=[]
-    # for trend in soup.find_all('b'):
-    #     if '#' in trend.text:
-    #         twitter.append(trend.text)
-    # print(twitter)
-
 tech_result=[]
 
 def scrape_t1():
@@ -33,7 +14,8 @@ def scrape_t1():
                 x = (a.get('title')).strip()
                 title = x.replace("\u2018","'")
                 title = title.replace("\u2019","'")
-                title = title.replace("\u2014","-")                
+                title = title.replace("\u2014","-")
+                # if not any(link['link'] == a.get('href') for link in tech_result):     
                 tech_result.append(json.dumps({
                     'title' : title,
                     'link' : a.get('href'),

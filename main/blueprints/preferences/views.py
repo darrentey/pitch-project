@@ -4,11 +4,20 @@ import json
 from main.util.fashion import *
 from main.util.tech import *
 from main.util.beauty import *
+from models.user_preference import User_Preference
+from flask_login import current_user
+from main.util.general import *
 
 preferences_blueprint = Blueprint('preferences',
                             __name__,
                             template_folder='templates/')
 
+from main.util.general import *
+@preferences_blueprint.route("/general")
+def general():
+    insta_tag()
+    twitter_tag()
+    return redirect(url_for('home'))
 
 @preferences_blueprint.route("/fashion")
 def fashion_job():
@@ -53,4 +62,24 @@ def beauty_job():
     scrape_b9()
     scrape_b10()
     
+@preferences_blueprint.route("/new/<int:id>",methods=['POST'])
+def add(id):
+    preference =  Preference.get(id=id)
+    add = User_Preference(user=current_user.id,preference=id)
+    if add.save():
+            flash(f"You have added {preference.categories} to your preference list.","primary")
+            return redirect(url_for('users.edit'))
+    else:
+        flash(f"Unable to add {preference.categories} to your preference list. Please try again later.","danger")
+        return redirect(url_for('users.edit'))
 
+@preferences_blueprint.route("/remove/<int:id>",methods=['POST'])
+def remove(id):
+    preference =  Preference.get(id=id)
+    remove = User_Preference.delete().where(User_Preference.user==current_user.id,User_Preference.preference==id)
+    if remove.execute():
+        flash(f"You have removed {preference.categories} from your preference list.","primary")
+        return redirect(url_for('users.edit'))
+    else:
+        flash(f"Unable to remove {preference.categories} from your preference list. Please try again later.","danger")
+        return redirect(url_for('users.edit'))

@@ -4,7 +4,10 @@ from forms import RegistrationForm
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,LoginManager,login_required,logout_user,login_user,current_user
 from models.preference import Preference
+from models.user_preference import User_Preference
+from models.general import General
 import json
+from random import shuffle
 
 users_blueprint = Blueprint('users',
                             __name__,
@@ -26,10 +29,41 @@ def register():
         return redirect(url_for('home'))
     return render_template('signup.html', title='Register', form=form)
 
-@users_blueprint.route("/dashboard", methods=['GET'])
-def dashboard():
-    results = []
-    tech = Preference.get(id=1)
-    for article in tech.articles:
-        results.append(json.loads(article))
-    return render_template('show.html',results=results) 
+@users_blueprint.route("/<username>", methods=['GET'])
+def show(username):
+    insta = General.get(name='instagram')
+    insta_tag = insta.contents
+    twitter = General.get(name='twitter')
+    twitter_tag = insta.contents
+    p_list = User_Preference.get_or_none(User_Preference.user==current_user.id)
+    if p_list:
+        results = []
+        p_id = User_Preference.select(User_Preference.preference).where(User_Preference.user==current_user.id)
+        preferences = Preference.select().where(Preference.id.in_(p_id))
+        for preference in preferences:
+            for article in preference.articles:
+                json_article = json.loads(article)
+                json_article['category']=preference.categories
+                results.append(json_article)
+        shuffle(results)
+        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
+    else:
+        results = []
+        preferences = Preference.select().where(Preference.id.in_(p_id))
+        for preference in preferences:
+            for article in preference.articles:
+                results.append(json.loads(article))
+            shuffle(results)
+            return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
+
+@users_blueprint.route("/edit/<int:id>", methods=['GET'])
+def edit(id):
+    p_list = User_Preference.get_or_none(User_Preference.user==current_user.id)
+    if p_list:
+        p_id = User_Preference.select(User_Preference.preference).where(User_Preference.user==current_user.id)
+        preferences = Preference.select().where(Preference.id.in_(p_id))
+        not_preferences = Preference.select().where(Preference.id.not_in(p_id))
+        return render_template('edit.html',not_preferences=not_preferences,preferences=preferences) 
+    else:
+        not_preferences = Preference.select()
+        return render_template('edit.html',not_preferences=not_preferences) 

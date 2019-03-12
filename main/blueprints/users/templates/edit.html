@@ -1,0 +1,23 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+<!-- show all preference that not in list -->
+{% if not_preferences %}
+    {% for not_preference in not_preferences %}
+        <form action="{{url_for('preferences.add',id=not_preference.id)}}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" / > 
+            <input type="submit" class="btn btn-outline-primary m-1 float-right" value="{{not_preference.categories}}"/>
+        </form>       
+    {% endfor %}
+{% endif %}
+<!-- show all preference that already in list -->
+{% if preferences %}
+    {% for preference in preferences %}
+        <form action="{{url_for('preferences.remove',id=preference.id)}}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" / > 
+            <input type="submit" class="btn btn-outline-danger m-1 float-right" value="{{preference.categories}}"/>
+        </form>
+    {% endfor %}
+{% endif %}
+{% endblock %}

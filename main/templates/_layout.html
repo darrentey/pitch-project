@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <!-- <link rel="shortcut icon" href="/static/images/nextagramlogo.png" type="image/png"> -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/image/edit-content.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:600" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="../css/filename.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
@@ -21,61 +22,67 @@
     {% block header %}{% endblock %}
     <style>
       body {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: '15px';
+        background:white;
+      }
+      .nav-link{
+        color:black!important;
+      }
+      .navbar-brand{
+        color:black!important;
+      }
+      nav.black{
         background:#f5f5f5;
+        height:50px;
+        opacity: 0.9;
       }
     </style>
     {% block css %}{% endblock %}
-    <title>{% block title %}{% endblock %}</title>
+    <title style="font-family: 'Dosis', sans-serif;">Content World | {% block title %}{% endblock %}</title>
   </head>
   <body>
-    {%block bodyhead%}{%endblock%}
+    
+    <div class="container-fluid">
       <!-- navbar -->
-      <nav style="color: black" class="navbar fixed-top p-1 px-5 mb-5 navbar-expand-lg justify-content-between ">
-        <a class="navbar-brand" href="/">  
-          <img src="#" width="35" height="33" class="d-inline-block align-top" alt="" />Home
+      <nav class="navbar fixed-top px-5 mb-5 navbar-expand-lg ">
+        <a style="font-family: 'Dosis', sans-serif;" class="navbar-brand" href="/">  
+          <img src="/static/image/edit-content.png" width="30" height="30" class="d-inline-block align-top mr-2" alt="logo" />CONTENT WORLD
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="container">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto">
-            <form action="#" method="POST" class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Type username" name='search'>
-              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </ul>
-          <ul class="navbar-nav">
-            {% if current_user.is_authenticated %}              
-              <label class="nav-link mt-1 text-primary" for="username">Welcome, {{current_user.username}} </label>
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#upload">
-                <!-- <img src="/static/images/photo.png" width="33" height="26" class="d-inline-block mt-1" alt="photo" /> -->
-              </a>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <!-- <img src="#" width="38" height="38" class="border rounded-circle d-inline-block align-top" alt="profile" /> -->
+        <div class="container d-flex">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              {% if current_user.is_authenticated %}              
+                <label class="nav-link mt-2" for="username">Welcome, {{current_user.username}} </label>
+                <a class="nav-link mt-2" href="#" data-toggle="modal" data-target="#upload">hello
+                  <!-- <img src="/static/images/photo.png" width="33" height="26" class="d-inline-block mt-1" alt="photo" /> -->
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{url_for('users.show',username=current_user.username)}}">My Profile</a>
-                  <a class="dropdown-item" href="{{url_for('users.edit',id=current_user.id)}}">Setting
-                    <!-- <img src="#" width="25" height="23" class="d-inline-block" alt="setting"/> -->
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">nothing</a>
-                </div>
-              </li>
-              <a class="nav-link mt-1" href="{{url_for('sessions.logout')}}">Logout</a>
-            {% else %}
-              <a class="nav-link mt-1" href="{{url_for('sessions.login')}}">Log In</a>
-              <a class="nav-link mt-1" href="{{url_for('users.register')}}">Sign Up</a>
-            {% endif %}
-          </ul>
-        </div>
-      </div>  
+                <!-- <a class="nav-link mt-1" href="#" > -->
+                  <!-- <img src="#" width="38" height="38" class="border rounded-circle d-inline-block align-top" alt="profile" /> -->
+                <!-- </a> -->
+                  
+                <a class="nav-link mt-2" href="{{url_for('users.show',username=current_user.username)}}">My Profile</a>
+                <a class="nav-link mt-2" href="{{url_for('users.edit',id=current_user.id)}}">Setting
+                  <!-- <img src="#" width="25" height="23" class="d-inline-block" alt="setting"/> -->
+                </a>
+                  <a class="nav-link mt-2" href="#">Images</a>
+                  </div>
+                </li>
+                <a class="nav-link" href="{{url_for('sessions.logout')}}">Logout</a>
+              {% else %}
+                <a class="nav-link" href="{{url_for('sessions.login')}}">Log In</a>
+                <a class="nav-link" href="{{url_for('users.register')}}">Sign Up</a>
+              {% endif %}
+            </ul>
+          </div>
+        </div>  
       </nav>
-        <div class="container-fluid mt-5 mb-0 pt-3 pb-2">
+      <div>
+        {%block bodyhead%}{%endblock%}
+        <div class="container container-fluid mt-5 p-2">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
@@ -86,11 +93,21 @@
             {% endif %}
           {% endwith %}
         </div>
-
-        {% block content %}{% endblock %}
-    <footer class="footer navbar-fixed-bottom">
-      <small class="text-right text-muted pr-2">© 2017 NEXTAGRAM. All rights reserved.</small>
-    </footer>
+        <div class="text-right fixed-bottom b-0">
+          <small class="text-muted pr-2">© 2019 <span style="font-family: 'Dosis', sans-serif;">CONTENT WORLD</span>. All rights reserved.</small>
+        </div>
+      </div>
+    </div>  
   </body>
-  
+<script>
+  $(window).on('scroll',function(){
+    if($(window).scrollTop()){
+      $('nav').addClass('black');
+    }
+    else{
+      $('nav').removeClass('black')
+    }
+  })
+</script>
+{% block js %}{% endblock %}
 </html>

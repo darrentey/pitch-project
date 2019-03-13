@@ -2,95 +2,140 @@
 {% block title %}
   Homepage
 {% endblock %}
+{% block header %}
+<link rel="stylesheet" href="/static/node_modules/sal.js/dist/sal.css" >
+<link rel="stylesheet" href="/static/css/home.css" >
+{% endblock %}
 {% block css %}
 <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background:#f5f5f5;
-      margin: 0;
-      overflow-x: hidden;
+  body {
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+  }
+  .v-header{
+    height: 86vh;
+    display:flex;
+    color: #fff;
+  }
+  .container{
+    max-width: 960px;
+  }
+  .fullscreen-video-wrap{
+    position: absolute;
+    margin:0;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    overflow: hidden;
+  }
+  #myvideo{
+    width: 100%;
+    min-height: 100%;
+  }
+  .header-overlay{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top:0;
+    left:0;
+    background:rgb(202, 201, 201);
+    z-index:1;
+    opacity: 0.5;
+  }
+  .header-content{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width:100%;
+    z-index: 2;
+  }
+  .header-content span{
+    text-transform: uppercase;
+    display: block;
+   }
+  .text1{
+    color: black;
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    position: relative;
+    animation: text 3s 1;
+  }
+  @keyframes text {
+    0%{
+        margin-bottom: -40px;
     }
-    .v-header{
-      height: 86vh;
-      display:flex;
-      color: #fff;
+    30%{
+        letter-spacing: 25px;
+        margin-bottom: -40px;
     }
-    .container{
-      max-width: 960px;
+    85%{
+        letter-spacing: 8px;
+        margin-bottom: -40px;
     }
-    .fullscreen-video-wrap{
-      position: absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100vh;
-      overflow: hidden;
-    }
-    #myvideo{
-      width: 100%;
-      min-height: 100%;
-    }
-    .header-overlay{
-      height: 100vh;
-      width: 100vw;
-      position: absolute;
-      top:0;
-      left:0;
-      background: black;
-      z-index:1;
-      opacity: 0.6;
-    }
-    .header-content{
-      text-align: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      width:100%;
-      z-index: 2;
-    }
-    .header-content span{
-      text-transform: uppercase;
-      display: block;
-     }
-    .text1{
-      color: white;
-      font-size: 60px;
-      font-weight: 700;
-      letter-spacing: 8px;
-      margin-bottom: 20px;
-      position: relative;
-      animation: text 3s 1;
-    }
-    .text2{
-      font-size: 30px;
-      color: whitesmoke;
-    }
-    @keyframes text {
-      0%{
-          margin-bottom: -40px;
+  }
+  @media(max-width:960px){
+      .container{
+          padding-right: 3rem;
+          padding-left: 3rem;
       }
-      30%{
-          letter-spacing: 25px;
-          margin-bottom: -40px;
-      }
-      85%{
-          letter-spacing: 8px;
-          margin-bottom: -40px;
-      }
-    }
-    @media(max-width:960px){
-        .container{
-            padding-right: 3rem;
-            padding-left: 3rem;
-        }
-    }
+  }
+  section{
+    height:calc(100vh - 8em);
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  .target{
+    padding: 130px 150px;
+    background: white;
+    display: -ms-grid;
+    display: grid;
+    text-align: left;
+    -ms-grid-rows: 30% 70%;
+    grid-template-rows: 30% 70%;
+    -ms-grid-columns: auto auto auto;
+    grid-template-columns: repeat(3, auto);
+    -ms-grid-gap: 1vw;
+    grid-gap: 8vw;
+  }
+  .target2{
+    padding: 0 130px;
+    background:#dde3e6;
+    display: -ms-grid;
+    display: grid;
+    text-align: left;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+    -ms-grid-gap: 1vw;
+    grid-gap: 5vw;
+  }
+  .target3{
+    padding: 50px 130px;
+    background: #595959;
+    color: white;
+    margin-top: 94px;
+    text-align: left;
+    display: -ms-grid;
+    display: grid;
+    text-align: left;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+    -ms-grid-gap: 1vw;
+    grid-gap: 5vw;
+  }
+  .typing{
+    font-size: 40px;
+    color: black;
+    position:relative;
+  }
 </style>
 {% endblock %}
-{% block header %}
-{% endblock %}
-
-{% block content %}
+{% block bodyhead %}
 <header class="v-header container">
   <div class="fullscreen-video-wrap" >
     <video autoplay muted loop id="myvideo" >
@@ -99,13 +144,80 @@
   </div>
   <div class="header-overlay" >
     <div class="container header-content">
-      <span><h1 class="display-4 pb-5 text1">Fluid jumbotron</h1></span>
-      <span><p class="lead text2">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p></span>
+      <span><h1 style="font-family: 'Dosis', sans-serif;"class="display-4 pb-5 text1">Content World</h1></span><br/>
+      <p class="typing"></p>
     </div>
   </div>
 </header>
 {% endblock %}
 
-
-
-
+<section class="target3 ">
+    <div data-sal-duration="1200" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-out-bounce">
+        <img style="width:450px;" src="/static/image/content.gif" />              
+    </div>
+    <div data-sal-duration="1200" data-sal="slide-down" data-sal-delay="600" data-sal-easing="ease-out-bounce">
+        <h1>ABOUT US<br></h1>
+        <p style="font-size:22px">Our mission is to inspire every content creator in generating great contents. We do that by improving our resources in terms of quality and quantity.</p>
+    </div>
+</section>
+<section class="target2">
+    <div class="left" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-out-bounce">
+        <h1>WHY US ?</h1><br/>
+        <p style="font-size:20px">When you create content daily for your brand or your clients, it makes sense to gather as much creative inspiration as possible. <br/><br/>Use our website to further stimulate your social media creation efforts and stay on top of any trending events coming up.</p>
+    </div>
+    <div class="right" data-sal-duration="1200" data-sal="slide-down" data-sal-delay="600" data-sal-easing="ease-out-bounce">
+        <img style="width:450px;" src="/static/image/Content-Create.png" />      
+    </div>
+</section>
+<section class="target">
+    <div class="one" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-out-bounce">
+        <img style="width:150px;" src="/static/image/content_new.png" />      
+    </div>
+    <div class="two" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="500" data-sal-easing="ease-out-bounce">
+        <img style="width:150px;" src="/static/image/photo.png" />      
+    </div>
+    <div class="three" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="700" data-sal-easing="ease-out-bounce">
+        <img style="width:150px;" src="/static/image/tips.png" />      
+    </div>
+    <div style="font-size:20px" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="300" data-sal-easing="ease-out-bounce">
+        <h3>RESOURCES</h3>
+        <p>Trending articles, news, blog posts as well as images from different sources.</p>
+    </div>
+    <div style="font-size:20px" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="500" data-sal-easing="ease-out-bounce">
+        <h3>STOCK IMAGES</h3>
+        <p>Helps you generate stock images for commercial,private or personal use.</p>
+    </div>
+    <div style="font-size:20px" data-sal-duration="1200" data-sal="slide-up" data-sal-delay="700" data-sal-easing="ease-out-bounce">
+        <h3>TIPS</h3>
+        <p>Marketing articles and blog posts that can help you in generating effective content.</p>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="/static/node_modules/sal.js/dist/sal.js"></script>
+<script>
+  sal({
+      once: false,
+  });
+</script>
+<script>
+  const texts = ['ONE STOP SOLUTION FOR CONTENT MARKETERS  '];
+  let count = 0;
+  let index = 0;
+  let currentText = '';
+  let letter = '';
+  (function type(){
+    if(count===texts.length){
+      count=0;
+    }
+    currentText = texts[count];
+    letter = currentText.slice(0,++index);
+    document.querySelector(".typing").textContent = letter;
+    if(letter.length === currentText.length){
+      count++;
+      index=0;
+    }
+    setTimeout(type,300);
+  })();
+</script>
+{% endblock %}

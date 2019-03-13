@@ -18,6 +18,7 @@ from main.util.general import *
 def general():
     insta_tag()
     twitter_tag()
+    calender()
     return redirect(url_for('home'))
 
 @preferences_blueprint.route("/fashion")
@@ -86,10 +87,10 @@ def add(id):
     add = User_Preference(user=current_user.id,preference=id)
     if add.save():
             flash(f"You have added {preference.categories} to your preference list.","primary")
-            return redirect(url_for('users.edit'))
+            return redirect(url_for('users.edit',id=current_user.id))
     else:
         flash(f"Unable to add {preference.categories} to your preference list. Please try again later.","danger")
-        return redirect(url_for('users.edit'))
+        return redirect(url_for('users.edit',id=current_user.id))
 
 @preferences_blueprint.route("/remove/<int:id>",methods=['POST'])
 def remove(id):
@@ -97,7 +98,7 @@ def remove(id):
     remove = User_Preference.delete().where(User_Preference.user==current_user.id,User_Preference.preference==id)
     if remove.execute():
         flash(f"You have removed {preference.categories} from your preference list.","primary")
-        return redirect(url_for('users.edit'))
+        return redirect(url_for('users.edit',id=current_user.id))
     else:
         flash(f"Unable to remove {preference.categories} from your preference list. Please try again later.","danger")
-        return redirect(url_for('users.edit'))
+        return redirect(url_for('users.edit',id=current_user.id))

@@ -1,5 +1,7 @@
 {% extends "_layout.html" %}
-
+{% block title %}
+  Dashboard
+{% endblock %}
 {% block content %}
 {% for result in results[:20] %}
 <div>
@@ -22,4 +24,20 @@
     <li>{{tag}}</li>
 {% endfor %}
 </ul>
+<table class="table table-light w-50">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Event</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+      <tr>
+        <td>{{event['date']}}</td>
+        <td>{{event['event']}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

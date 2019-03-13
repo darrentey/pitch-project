@@ -1,0 +1,23 @@
+{
+  "name": "pitch-project",
+  "version": "1.0.0",
+  "description": "# let's do this guys!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrentey/pitch-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darrentey/pitch-project/issues"
+  },
+  "homepage": "https://github.com/darrentey/pitch-project#readme",
+  "dependencies": {
+    "sal.js": "^0.5.0"
+  }
+}

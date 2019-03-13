@@ -1,3 +1,67 @@
+
+
 .fa-google-plus {
     font-size: 1.3em;
 }
+
+.child:hover {
+transform: scale(1.1);
+transition: all .5s;
+}
+
+.child {
+    width: 250px;
+}
+
+.carousel-btn:hover .owl-prev {
+    transform: translate(48px, 0);
+    transition: all .3s;
+}
+
+.carousel-btn:hover .owl-next {
+    transform: translate(-48px, 0);
+    transition: all .3s;
+}
+
+.trending-hashtag {
+    float: right;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+
+  .footer {
+    bottom: 0;
+    background-color: #efefef;
+    z-index: -9999;
+  }
+
+  .alert {
+    margin-bottom: 0;
+  }
+
+  .card:hover {
+      background-color: rgba(255, 255, 255, 1);
+  }
+
+  .owl-next {
+      position:relative!important;
+      float:right;
+      left: 48px!important;
+  }
+
+  .owl-prev {
+        position:relative!important;
+        float:left;
+        right: 48px!important;
+    }
+
+  .carousel-controls {
+      overflow: hidden;
+      position: absolute;
+      top: 35%;
+      z-index: 1;
+  }

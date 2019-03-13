@@ -70,3 +70,7 @@ def edit():
     else:
         not_preferences = Preference.select()
         return render_template('edit.html',not_preferences=not_preferences) 
+
+@users_blueprint.route("/carousel") 
+def carousel():
+    return render_template('carousel.html')

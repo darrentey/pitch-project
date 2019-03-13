@@ -1,0 +1,107 @@
+{% extends "_layout.html" %}
+{% block title %}
+  Homepage
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12 row">
+        <div class="col-md-12 carousel-btn">
+          <div class="owl-carousel">
+            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
+            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
+            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
+            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
+          </div>
+          <div class="container-fluid border border-danger carousel-controls">
+                <button type="button" role="presentation" class="btn btn-primary owl-prev"><</button>
+                <button type="button" role="presentation" class="btn btn-primary owl-next">></button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-9 main-container border border-primary">
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+            <h1>Main Content Box</h1>
+          </div>
+          <div class="col-md-3 p-0 border border-danger sticky-top trending-hashtag">
+              <div class="column">
+                <div class="card">
+                  <h3>Card 1</h3>
+                  <p>Some text</p>
+                </div>
+              </div>
+            
+              <div class="column">
+                <div class="card">
+                  <h3>Card 2</h3>
+                  <p>Some text</p>
+                </div>
+              </div>
+              
+              <div class="column">
+                <div class="card">
+                  <h3>Card 3</h3>
+                  <p>Some text</p>
+                </div>
+              </div>
+              
+              <div class="column">
+                <div class="card">
+                  <h3>Card 4</h3>
+                  <p>Some text</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <script
+        src="http://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+      <script>
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items:4,
+            loop:true,
+            margin:0,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            navText: ['<span class="fa-stack"><i class="fa fa-circle fa-stack-1x"></i><i class="fa fa-chevron-circle-left fa-stack-1x fa-inverse"></i></span>','<span class="fa-stack"><i class="fa fa-circle fa-stack-1x"></i><i class="fa fa-chevron-circle-right fa-stack-1x fa-inverse"></i></span>']
+        });
+      
+        var owl = $('.owl-carousel');
+          owl.owlCarousel();
+          // Go to the next item
+          $('.owl-next').click(function() {
+              owl.trigger('next.owl.carousel', [1000]);
+          })
+          // Go to the previous item
+          $('.owl-prev').click(function() {
+              // With optional speed parameter
+              // Parameters has to be in square bracket '[]'
+              owl.trigger('prev.owl.carousel', [1000]);
+          })
+      </script>
+      {% endblock %}

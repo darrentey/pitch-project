@@ -19,9 +19,16 @@ def general():
     insta_tag()
     twitter_tag()
     calender()
+    scrape_m1()
+    scrape_m2()
+    scrape_m3()
+    scrape_m4()
+    scrape_m5()
+    scrape_m6()
+    General.update(contents=mar_result).where(General.name=="marketing").execute()
     return redirect(url_for('home'))
 
-@preferences_blueprint.route("/fashion")
+@preferences_blueprint.route("/fashion") 
 def fashion_job():
     scrape_f1()
     scrape_f2()
@@ -33,6 +40,7 @@ def fashion_job():
     scrape_f8()
     scrape_f9()
     scrape_f10()
+    scrape_f11()
     Preference.update(articles=fashion_result).where(Preference.categories=='Fashion').execute()
     return redirect(url_for('home'))
 

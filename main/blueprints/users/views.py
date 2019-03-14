@@ -91,6 +91,14 @@ def update(id):
         return render_template('edit.html',errors=user.errors,user=user)
     return render_template('401.html'), 401 
 
-@users_blueprint.route("/carousel") 
+@users_blueprint.route("/carousel",methods=['GET']) 
 def carousel():
-    return render_template('carousel.html')
+    results = []
+    preferences = Preference.select()
+    for preference in preferences:
+        for article in preference.articles:
+            json_article = json.loads(article)
+            json_article['category']=preference.categories
+            results.append(json_article)
+    shuffle(results)    
+    return render_template('carousel.html',results=results)

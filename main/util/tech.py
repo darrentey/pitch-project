@@ -11,15 +11,15 @@ def scrape_t1():
     for div in soup.find_all('div',class_='td-module-thumb'):
         for a in div.find_all('a'):
             for img in a.find_all('img'): 
-                # title = x.replace("\u2018","'")
-                # title = title.replace("\u2019","'")
-                # title = title.replace("\u2014","-")
-                # if not any(link['link'] == a.get('href') for link in tech_result):     
-                tech_result.append(json.dumps({
-                    'title' : (a.get('title')).strip(),
-                    'link' : a.get('href'),
-                    'image' : img.get('src')
-                }))
+                soup = BeautifulSoup(urlopen(a.get('href')), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':"og:description"}):
+                    desc = meta['content']  
+                    tech_result.append(json.dumps({
+                        'title' : (a.get('title')).strip(),
+                        'link' : a.get('href'),
+                        'image' : img.get('src'),
+                        'desc' : desc
+                    }))
 
 def scrape_t2():
     soup = BeautifulSoup(urlopen('https://www.cnet.com/news/'),'html.parser')
@@ -28,20 +28,25 @@ def scrape_t2():
         for div1 in main.find_all('div',class_='assetText'):
             for h3 in div1.find_all('h3'):
                 title = (h3.get_text()).strip()
-                link = url+h3.find('a')['href'] 
+                link = url+h3.find('a')['href']
+            for p in div1.find_all('p'): 
+                desc = (p.get_text()).strip()
         for div2 in main.find_all('div',class_='assetThumb'):
             for a in div2.find_all('a'):
                 for img in a.find_all('img'):
                     if img.get('src'):
                         image = img.get('src')
-            tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+            tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t3():
     soup = BeautifulSoup(urlopen('https://techcrunch.com'),'html.parser')
     title=[]
     link=[]
     image=[]
+    desc=[]
     for div in soup.find_all('div',class_='river--homepage'):
+        for div2 in div.find_all('div',class_='post-block__content'):
+            desc.append(div2.text)       
         for h2 in div.find_all('h2',class_='post-block__title'):
             title.append((h2.find('a').get_text()).strip())
             link.append(h2.find('a')['href']) 
@@ -52,7 +57,8 @@ def scrape_t3():
         tech_result.append(json.dumps({
             'title':title[i],
             'link':link[i],
-            'image':image[i]
+            'image':image[i],
+            'desc':desc[i]
         }))
         i+=1
 
@@ -60,27 +66,29 @@ def scrape_t4():
     soup = BeautifulSoup(urlopen('https://www.techmeme.com'),'html.parser')
     url='https://www.techmeme.com'
     for div in soup.find_all('div',class_='clus'):
-        for a in div.find_all('a'):
-            for img in a.find_all('img'):
-                link = a.get('href')
-                image = url+img.get('src')
-        for a in div.find('a',class_='ourh'):
-            title = a
-        tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        title = div.find('strong').get_text()
+        summary = div.find('div',class_='ii').get_text()
+        if title in summary:
+            desc = summary.replace(title,'')
+            for a in div.find_all('a'):
+                for img in a.find_all('img'):
+                    link = a.get('href')
+                    image = url+img.get('src')
+            tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t5():
     soup = BeautifulSoup(urlopen('https://www.nytimes.com/section/technology'),'html.parser')
     url='https://www.nytimes.com'
-    for article in soup.find_all('article'):
-        for a in article.find_all('a'):
+    for ol in soup.find_all('ol'):
+        for a in ol.find_all('a'):
             for img in a.find_all('img'):
                 link = url+a.get('href')
                 image = img.get('src')
-        for div in article.find_all('div'):
-            for a in div.find_all('a'):
-                if a.get_text():
-                    title = a.get_text()
-        tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+            for h2 in a.find_all('h2'):            
+                title = h2.text
+            for p in a.find_all('p',class_='css-1echdzn'):            
+                desc = p.text
+                tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t6():
     soup = BeautifulSoup(urlopen('https://arstechnica.com/gadgets'),'html.parser')
@@ -93,7 +101,10 @@ def scrape_t6():
         for header in li.find_all('header'):
             link = header.find('a')['href']
             title = header.find('a').get_text(strip=True)
-        tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+            desc = header.find('p').get_text(strip=True)
+        tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+         
+        
 
 def scrape_t7():
     soup = BeautifulSoup(urlopen('https://www.theverge.com'),'html.parser')
@@ -105,8 +116,12 @@ def scrape_t7():
             link = div2.find('a')['href']  
             title = (div2.find('a').get_text()).strip()
         if image != None:
-            if link != 'https://www.theverge.com/':    
-                tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+            if link != 'https://www.theverge.com/': 
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'name':'description'}):
+                    desc = meta['content']   
+                tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+
 
 def scrape_t8():
     req=Request("https://readwrite.com",headers = {'User-Agent': 'Mozilla/5.0'})
@@ -119,7 +134,9 @@ def scrape_t8():
             for header in div2.find_all('header'):
                 link = header.find('a')['href']  
                 title = header.find('a').get_text()
-        tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+            for div3 in div2.find_all('div',class_='entry-content'):
+                desc = div3.find('p').text
+        tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t9():
     soup = BeautifulSoup(urlopen('https://venturebeat.com'),'html.parser')
@@ -131,15 +148,20 @@ def scrape_t9():
             for header in article.find_all('header',class_='article-header'):
                 link = header.find('a')['href'] 
                 title = header.find('a').get_text()
-            tech_result.append(json.dumps({'title':title,'link':link,'image':image}))
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':"og:description"}):
+                    desc = meta['content']  
+            tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t10():
     r = requests.get('http://feeds.bbci.co.uk/news/technology/rss.xml')
     data = r.text
     soup = BeautifulSoup(data,'html.parser')
     for item in soup.find_all('item'):
+        desc = item.find('description')
         tech_result.append(json.dumps({
             'title':item.find(text=lambda tag: isinstance(tag, bs4.CData)).string.strip(),
             'link':item.find('guid').text,
-            'image':item.find('media:thumbnail')['url']
+            'image':item.find('media:thumbnail')['url'],
+            'desc':desc.find(text=lambda tag: isinstance(tag, bs4.CData)).string.strip()
         }))

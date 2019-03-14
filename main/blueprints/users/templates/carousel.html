@@ -8,7 +8,7 @@
 {% block content %}
 <div class="col-md-12 row">
         <div class="col-md-12 carousel-btn">
-          <div class="owl-carousel">
+          <div class="cold-md-12 owl-carousel">
             <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
             <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
             <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
@@ -23,18 +23,76 @@
       
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-9 main-container border border-primary">
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
+          <div class="col-md-9 main-container border border-primary tabContainer">
+                <div class="tab">
+                        <button class="tablinks active" onclick="openTab(event, 'Fashion')" id="defaultOpen">Fashion</button>
+                        <button class="tablinks" onclick="openTab(event, 'Tech')">Tech</button>
+                        <button class="tablinks" onclick="openTab(event, 'Beauty')">Beauty</button>
+                        <button class="tablinks" onclick="openTab(event, 'Lifestyle')">Lifestyle</button>
+                      </div>
+                      
+                      <!-- Tab content -->
+                      <div id="Fashion" class="tabcontent">
+                        <div class="tab-card" style="display: block">
+                            <h3>Fashion</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                      </div>
+                      
+                      <div id="Beauty" class="tabcontent" style="display: none">
+                        <div class="tab-card">
+                            <h3>Beauty</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                      </div>
+                      
+                      <div id="Tech" class="tabcontent">
+                        <div class="tab-card">
+                            <h3>tech</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                      </div>
+
+                      <div id="Lifestyle" class="tabcontent">
+                        <div class="tab-card">
+                            <h3>Lifestyle</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                        <div class="tab-card">
+                            <h3>Card 1</h3>
+                            <p>Some text</p>
+                        </div> 
+                      </div>
+              
+                
             <h1>Main Content Box</h1>
             <h1>Main Content Box</h1>
             <h1>Main Content Box</h1>
@@ -103,5 +161,29 @@
               // Parameters has to be in square bracket '[]'
               owl.trigger('prev.owl.carousel', [1000]);
           })
+
+          function openTab(evt, tabName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+          
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+          
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+          
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+
+        }
+        document.getElementById("defaultOpen").click();
+          
       </script>
       {% endblock %}

@@ -6,7 +6,7 @@ import json
 lifestyle_result=[]
 
 def scrape_l1():
-    soup = BeautifulSoup(urlopen('https://www.health.com'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.health.com'), 'html.parser')
     url = 'https://www.health.com'
     for article in soup.find_all('article',class_='partial tile media image-top type-article'):
         for img in article.find_all('a',class_='media-img margin-16-bottom'):
@@ -18,7 +18,7 @@ def scrape_l1():
                 }))
 
 def scrape_l2():
-    soup = BeautifulSoup(urlopen('https://www.womenshealthmag.com'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.womenshealthmag.com'), 'html.parser')
     url='https://www.womenshealthmag.com'
     for div in soup.find_all('div',class_='simple-item grid-simple-item'):
         for img in div.find_all('img'):
@@ -47,7 +47,7 @@ def scrape_l2():
 
 # printing out json two times
 def scrape_l3():
-    soup = BeautifulSoup(urlopen('https://www.cntraveller.com/topic/inspiration'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.cntraveller.com/topic/inspiration'), 'html.parser')
     url = 'https://www.cntraveller.com'
     for li in soup.find_all('li',class_='c-card-section__card-listitem js-c-card-section__card-listitem'):
         for img in li.find_all('img'):
@@ -59,7 +59,7 @@ def scrape_l3():
                 }))
 
 def scrape_l4():
-    soup = BeautifulSoup(urlopen('https://www.ricksteves.com/watch-read-listen/read/travel-news'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.ricksteves.com/watch-read-listen/read/travel-news'), 'html.parser')
     url = 'https://www.ricksteves.com'
     for div in soup.find_all('div',class_='width40'):
         for img in div.find_all('img'):
@@ -71,7 +71,7 @@ def scrape_l4():
                 }))
 
 def scrape_l5():
-    soup = BeautifulSoup(urlopen('https://www.medicalnewstoday.com'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.medicalnewstoday.com'), 'html.parser')
     url = 'https://www.medicalnewstoday.com'
     for li in soup.find_all('li',class_='featured'):
         for img in li.find_all('img'):
@@ -91,7 +91,7 @@ def scrape_l5():
                 }))
 
 def scrape_l6():
-    soup = BeautifulSoup(urlopen('https://www.star2.com/travel'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.star2.com/travel'), 'html.parser')
     url = 'https://www.star2.com'
     for div in soup.find_all('div',class_='col-sm-6 clearfix'):
         for img in div.find_all('img'):
@@ -103,7 +103,7 @@ def scrape_l6():
                 }))
 
 def scrape_l7():
-    soup = BeautifulSoup(urlopen('https://www.star2.com/food'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.star2.com/food'), 'html.parser')
     url = 'https://www.star2.com'
     for div in soup.find_all('div',class_='col-sm-4'):
         for img in div.find_all('img'):
@@ -115,7 +115,7 @@ def scrape_l7():
                 }))
 
 def scrape_l8():
-    soup = BeautifulSoup(urlopen('https://www.justaguything.com'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.justaguything.com'), 'html.parser')
     for article in soup.find_all('article'):
         for img in article.find_all('img'):
             for a in article.find_all('h2'):
@@ -126,7 +126,7 @@ def scrape_l8():
                 }))
 
 def scrape_l9():
-    soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/lifestyle'),'lxml')
+    soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/lifestyle'),'html.parser')
     url = 'https://www.gq-magazine.co.uk'
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
@@ -141,7 +141,7 @@ def scrape_l9():
         lifestyle_result.append(json.dumps({'title':title,'link':link,'image':image}))
 
 def scrape_l10():
-    soup = BeautifulSoup(urlopen('https://www.telegraph.co.uk/travel/news/'), 'lxml')
+    soup = BeautifulSoup(urlopen('https://www.telegraph.co.uk/travel/news/'), 'html.parser')
     url = 'https://www.telegraph.co.uk'
     for li in soup.find_all('li',class_='list-of-entities__item'):
         for img in li.find_all('img'):

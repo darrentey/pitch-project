@@ -29,3 +29,85 @@ def calender():
     for event in events:
         new_list.append(json.dumps(event))
     General.update(contents=new_list).where(General.name=="calendar").execute()
+
+mar_result=[]
+
+def scrape_m1():
+    soup = BeautifulSoup(urlopen('http://www.curata.com/blog/category/creation/'),'html.parser')
+    for div in soup.find_all('div',class_='post-grid'):
+        for article in div.find_all('article'):        
+            desc = article.find('p').text + '...'
+            for img in article.find_all('img'):
+                image = img.get('src')
+                link = article.find('a')['href']
+            for h2 in article.find_all('h2'):
+                title = h2.find('a').get_text() 
+            mar_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+
+def scrape_m2():
+    soup = BeautifulSoup(urlopen('https://contentmarketinginstitute.com/blog/'),'html.parser')
+    for div in soup.find_all('div',class_='hfeed'):
+        for div2 in div.find_all('div',class_='post'):
+            desc = div2.find('p').text
+            link = div2.find('a')['href']
+            title = div2.find('a').get_text() 
+            mar_result.append(json.dumps({'title':title,'link':link,'image':'','desc':desc}))
+
+def scrape_m3():
+    req=Request("https://www.convinceandconvert.com/category/greatest-hits/",headers = {'User-Agent': 'Mozilla/5.0'})
+    soup = BeautifulSoup(urlopen(req),'html.parser')
+    for article in soup.find_all('article',class_='post'):
+        for div in article.find_all('div'):
+            for img in div.find_all('img'):
+                image = img.get('src')
+        for h4 in article.find_all('h4',class_='heading'):
+            for a in h4.find_all('a'):
+                link = a.get('href')
+                title = a.text
+                req=Request(link,headers = {'User-Agent': 'Mozilla/5.0'})
+                soup = BeautifulSoup(urlopen(req), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'name':"description"}):
+                    desc = meta['content']  
+            mar_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+
+def scrape_m4():
+    soup = BeautifulSoup(urlopen('https://www.briansolis.com/category/articles/'),'html.parser')
+    for article in soup.find_all('article',class_='post'):
+        desc = article.find('p').text
+        for a in article.find_all('a',class_='overlay'):
+            link = a.get('href')
+            title = a.get('title')
+        for img in article.find_all('img'):
+            image = img.get('src')
+            mar_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+
+def scrape_m5():
+    soup = BeautifulSoup(urlopen('http://www.postadvertising.com/'),'html.parser')
+    url = 'http://www.postadvertising.com'
+    for article in soup.find_all('article',class_='entry'):
+        for div in article.find_all('div',class_='excerpt-thumb'):
+            link = url + div.find('a')['href']
+            for a in div.find_all('a',class_='content-fill'):
+                for img in a.find_all('img'):
+                    image = img.get('data-image')
+                    title = img.get('alt')
+        for div2 in article.find_all('div',class_='entry-content'):
+            for p in div2.find_all('p'):
+                desc = p.text
+                mar_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+
+def scrape_m6():
+    soup = BeautifulSoup(urlopen('https://blog.hubspot.com/marketing'),'html.parser')
+    for article in soup.find_all('article'):
+        for figure in article.find_all('figure'):
+            for img in figure.find_all('img'):
+                image = img.get('src')
+        for div in article.find_all('div',class_='blog-card__content'):
+            for h3 in div.find_all('h3'):
+                for a in h3.find_all('a'):
+                    link = a.get('href')
+                    title = a.text.strip()
+                    soup = BeautifulSoup(urlopen(link), 'html.parser')
+                    for meta in soup.find_all('meta',attrs={'name':"description"}):
+                        desc = meta['content']  
+                        mar_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))

@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:600" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/filename.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css ">
     <link href="https://fonts.googleapis.com/css?family=Lilita+One|Roboto+Condensed" rel="stylesheet">
@@ -27,27 +25,71 @@
       body {
         font-family: 'Open Sans', sans-serif;
         font-size: '15px';
-        background:white;
+        background:#f5f5f5;
       }
       .nav-link{
         color:black!important;
       }
       .navbar-brand{
-        color:black!important;
+        color:rgb(0, 209, 192)!important;
       }
       nav.black{
-        background:#f5f5f5;
+        background:rgb(49, 49, 49);
         height:50px;
-        opacity: 0.9;
+      }
+      .nav-link.white{
+        color:rgb(0, 209, 192)!important;
+      }
+      nav ul a{
+        font-weight: 700;
+        padding:1rem 0;
+        margin:0 1rem;
+        position:relative;
+        letter-spacing: 2px;
+      }
+      nav ul a:last-child{
+        margin-right: 0;
+      }
+      nav ul a::before,
+      nav ul a::after{
+        content:'';
+        position:absolute;
+        width:100%;
+        height:2px;
+        background: rgb(248, 1, 51);
+        left: 0;
+        transform: scaleX(0);
+        transition:all .5s
+      }
+      nav ul a::before{
+        top:0;
+        transform-origin: left;
+      }
+      nav ul a::after{
+        bottom: 0;
+        transform-origin: right;
+      }
+      nav ul a:hover::before,
+      nav ul a:hover::after{
+        transform:scaleX(1)
+      }
+      @keyframes slideIn{
+        from{
+
+        }
+        to{
+          transform: translateX(0);
+        }
       }
     </style>
     {% block css %}{% endblock %}
     <title style="font-family: 'Dosis', sans-serif;">Content World | {% block title %}{% endblock %}</title>
   </head>
   <body>
-    
-    <div class="container-fluid p-0">
 
+    {%block bodyhead%}{%endblock%}
+    <div class="container-fluid">
+      <!-- navbar -->
       <nav class="navbar fixed-top px-5 mb-5 navbar-expand-lg ">
 
         <a style="font-family: 'Dosis', sans-serif;" class="navbar-brand" href="/">  
@@ -63,20 +105,10 @@
 
             <ul class="navbar-nav">
               {% if current_user.is_authenticated %}              
-                <label class="nav-link mt-2" for="username">Welcome, {{current_user.username}} </label>
-                <a class="nav-link mt-2" href="#" data-toggle="modal" data-target="#upload">Images
-                  <!-- <img src="/static/images/photo.png" width="33" height="26" class="d-inline-block mt-1" alt="photo" /> -->
-                </a>
-                <!-- <a class="nav-link mt-1" href="#" > -->
-                  <!-- <img src="#" width="38" height="38" class="border rounded-circle d-inline-block align-top" alt="profile" /> -->
-                <!-- </a> -->
-                  
-                <a class="nav-link mt-2" href="{{url_for('users.show',username=current_user.username)}}">My Profile</a>
-                <a class="nav-link mt-2" href="{{url_for('users.edit',id=current_user.id)}}">Setting
-                  <!-- <img src="#" width="25" height="23" class="d-inline-block" alt="setting"/> -->
-                </a>
-                  <a class="nav-link mt-2" href="#">Tips</a>
-                </li>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#upload">Images</a>
+                <a class="nav-link" href="{{url_for('marketings.show')}}">Tips</a>
+                <a class="nav-link" href="{{url_for('users.show',username=current_user.username)}}">Profile</a>
+                <a class="nav-link" href="{{url_for('users.edit',id=current_user.id)}}">Preference</a>
                 <a class="nav-link" href="{{url_for('sessions.logout')}}">Logout</a>
               {% else %}
                 <a class="nav-link" href="{{url_for('sessions.login')}}">Log In</a>
@@ -109,14 +141,17 @@
         <div class="text-right fixed-bottom b-0">
           <small class="text-muted pr-2">© 2019 <span style="font-family: 'Dosis', sans-serif;">CONTENT WORLD</span>. All rights reserved.</small>
         </div>
+   
   </body>
 <script>
   $(window).on('scroll',function(){
     if($(window).scrollTop()){
       $('nav').addClass('black');
+      $('.nav-link').addClass('white');
     }
     else{
       $('nav').removeClass('black')
+      $('.nav-link').removeClass('white');
     }
   })
 </script>

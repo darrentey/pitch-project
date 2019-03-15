@@ -62,6 +62,7 @@ def show(username):
         return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag,events=events) 
 
 @users_blueprint.route("/edit/<int:id>", methods=['GET'])
+@login_required
 def edit(id):
     if current_user.id==id:
         user = User.get(User.id==id)
@@ -108,3 +109,4 @@ def carousel():
 @users_blueprint.route("/users_preference") 
 def users_preference():
     return render_template('users_preference.html')
+

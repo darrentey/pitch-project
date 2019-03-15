@@ -2,7 +2,14 @@
 {% block title %}
   Dashboard
 {% endblock %}
+{% block css%}
+<style>
+  body{
+    background: #f5f5f5;
+  }
+</style>{% endblock%}
 {% block content %}
+
 <div class="intro container-fluid border border-success">
   <div class="row border border-danger">
 
@@ -62,3 +69,44 @@
     </ul>
               
 </div>
+
+{% for result in results[:20] %}
+<div>
+    <a href="{{result['link']}}">
+        <p>{{result['title']}}</p>
+        <img src="{{result['image']}}" />
+        <p>{{result['desc']}}</p>
+    </a>
+    <p>{{result['category']}}</p>
+</div>
+{% endfor %}
+<h3>Instagram tag</h3>
+<ul>
+{% for tag in insta_tag[:20] %}
+    <li>{{tag}}</li>
+{% endfor %}
+</ul>
+<h3>Twitter tag</h3>
+<ul>
+{% for tag in twitter_tag[:20] %}
+    <li>{{tag}}</li>
+{% endfor %}
+</ul>
+<table class="table table-light w-50">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Event</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for event in events %}
+      <tr>
+        <td>{{event['date']}}</td>
+        <td>{{event['event']}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

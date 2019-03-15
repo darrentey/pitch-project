@@ -46,12 +46,12 @@ def scrape_m1():
 
 def scrape_m2():
     soup = BeautifulSoup(urlopen('https://contentmarketinginstitute.com/blog/'),'html.parser')
-    for div in soup.find_all('div',class_='hfeed'):
-        for div2 in div.find_all('div',class_='post'):
-            desc = div2.find('p').text
-            link = div2.find('a')['href']
-            title = div2.find('a').get_text() 
-            mar_result.append(json.dumps({'title':title,'link':link,'image':'','desc':desc}))
+    for div in soup.find_all('div',class_='post'):
+        for h2 in div.find_all('h2',class_='entry-title'):
+            desc = div.find('p').text
+            link = h2.find('a')['href']
+            title = h2.find('a').get_text() 
+            mar_result.append(json.dumps({'title':title,'link':link,'image':'https://s3-ap-southeast-1.amazonaws.com/nextagram-backend/cover.png','desc':desc}))
 
 def scrape_m3():
     req=Request("https://www.convinceandconvert.com/category/greatest-hits/",headers = {'User-Agent': 'Mozilla/5.0'})

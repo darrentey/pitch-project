@@ -1,0 +1,161 @@
+{% extends '_layout.html' %}
+
+{% block css %}
+<style>
+    body {
+        margin: auto;
+        box-sizing: border-box;
+    }
+    
+    /* card styling */
+    .card {
+        margin-bottom: 8px;
+        page-break-inside: avoid;
+    }
+    
+    .card-img {
+        width: 100%;
+    }
+    
+    .card-img-overlay {
+        display:none;
+        /* opacity: 0;
+        transition: 0.6s; */
+    }
+    
+    /* .highlight {
+        opacity: 1;
+        transition: 0.6s;
+    } */
+    
+    #reset-button {
+        display: none;
+    }
+    
+    .username {
+        position: relative;
+    }
+    
+    #card-container {
+        column-count: 3;
+        column-gap: 8px;
+    }
+    
+    .btn {
+        float: right;
+        opacity: 0.8;
+    }
+    
+    /* input styling */
+    .search {
+        margin: auto;
+        border:4px solid teal;
+        border-radius:4em;
+        padding:15px;
+        background-color:whitesmoke;
+        color: black;
+        font-size: 18px;
+        width: 60%;
+    }
+    
+    .search >i {
+        margin-right:10px;
+    }
+    .search-input { 
+        border: none;
+        width: 70%;
+        max-width: 70%;
+        background-color: whitesmoke;
+        
+    }
+    .search-input:focus { 
+        outline: none;
+        background: none;
+    }
+    
+    /* remove chrome autocomplete highlight */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px whitesmoke inset !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <br/>
+    <form id="my-form">
+        <div class="search">
+            <i class="fa fa-search"></i>
+            <input type="text" class="search-input" id="searchTerm" onfocus="value=''" name="searchTerm" placeholder="Search topic" required ="True">
+            <button id="reset-button">Reset</button>
+        </div>
+    </form>
+    <br/>
+    <div class="container-fluid">
+        <div id="card-container"></div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('my-form');
+        const input = document.getElementById('searchTerm');
+        const API_URL = 'https://api.unsplash.com/search/photos?&per_page=200&client_id={{unsplash}}'
+        const cardSection = document.getElementById('card-container');
+        let count = 1
+        
+        form.addEventListener('submit', formSubmitted);
+
+        function formSubmitted(e) {
+            event.preventDefault(e);
+            const searchTerm = input.value;
+            
+            search(searchTerm)  
+                .then(displayImages)
+            // for (i=0; i<5 ;i++) {
+            // }
+        }
+
+        async function search(searchTerm) {
+            const url = `${API_URL}&query=${searchTerm}&page=${count}`
+            count = count + 1;
+            const response = await fetch(url);
+            const result = await response.json();
+            return result.results;
+        }
+
+        function displayImages(images) {
+            images.forEach(function(image, i) {
+                $('#card-container').append(`
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="${image.urls.regular}"/>
+                    <div id="${i}" class="card-img-overlay">
+                        <img src="${image.user.profile_image.small}" class="rounded-circle">
+                        <span class='username'>${image.user.name}</span>
+                        <a href="${image.links.download_location}" class='btn btn-info btn-sm'><i class="fa fa-download"></i></a>
+                    </div>
+                </div>
+                `)
+            })
+
+            $('.card').hover(function() {
+                $('.card-img-overlay').toggle('slow');
+            });
+            
+
+            $('.btn').hover(function() {
+                $(this).css('cursor','pointer');
+            });
+        }
+
+        // addEventListener('mouseover',function(e) {
+        //     e.target.classList.toggle('highlight');
+        // })
+
+        // empty search container
+        $('#reset-button').click(function(){
+            $('#card-container').empty();
+        })
+    </script>
+
+{% endblock %}

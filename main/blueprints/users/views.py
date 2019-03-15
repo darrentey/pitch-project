@@ -92,8 +92,10 @@ def update(id):
         return render_template('edit.html',errors=user.errors,user=user)
     return render_template('401.html'), 401 
 
-@users_blueprint.route("/carousel",methods=['GET']) 
+@users_blueprint.route("/carousel",methods=['GET'])
 def carousel():
+    insta_tag = General.get(name='instagram').contents
+    twitter_tag = General.get(name='twitter').contents
     results = []
     preferences = Preference.select()
     for preference in preferences:
@@ -101,5 +103,10 @@ def carousel():
             json_article = json.loads(article)
             json_article['category']=preference.categories
             results.append(json_article)
-    shuffle(results)    
-    return render_template('carousel.html',results=results)
+    shuffle(results)
+    return render_template('carousel.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag)
+
+@users_blueprint.route("/users_preference") 
+def users_preference():
+    return render_template('users_preference.html')
+

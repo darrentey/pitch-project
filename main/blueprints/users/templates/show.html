@@ -9,6 +9,67 @@
   }
 </style>{% endblock%}
 {% block content %}
+
+<div class="intro container-fluid border border-success">
+  <div class="row border border-danger">
+
+    <div class="col-md-9 border border-primary main-container intro_content d-flex flex-wrap justify-content-between">
+      {% for result in results[:20] %}
+      <div class="intro_item">
+        <a href="{{result['link']}}">
+          <div class="intro_image">
+            <img src="{{result['image']}}" alt="{{result['title']}}">
+          </div>
+        </a>
+          <div class="intro_body">
+            <div class="intro_title">
+              <p>{{result['title']}}</p>
+            </div>
+            <div class="intro_subtitle">
+                <p>{{result['category']}}</p>
+              </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="col-md-3 container border border-warning">
+        <table class="table table-light w-50">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Event</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in events %}
+            <tr>
+              <td>{{event['date']}}</td>
+              <td>{{event['event']}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% endblock %}
+    </div>
+    
+  </div>
+
+    <h3>Instagram tag</h3>
+    <ul>
+      {% for tag in insta_tag[:20] %}
+      <li>{{tag}}</li>
+      {% endfor %}
+    </ul>
+    <h3>Twitter tag</h3>
+    <ul>
+      {% for tag in twitter_tag[:20] %}
+      <li>{{tag}}</li>
+      {% endfor %}
+    </ul>
+              
+</div>
+
 {% for result in results[:20] %}
 <div>
     <a href="{{result['link']}}">
@@ -48,3 +109,4 @@
     </tbody>
 </table>
 {% endblock %}
+

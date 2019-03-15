@@ -1,9 +1,42 @@
 
+h4 {
+    font-family: 'Lilita One', 'Concert One', Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #595959;
+    letter-spacing: 2px;
+    padding: 18px;
+    margin-right: 20px;
+}
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+    margin-top:10px;
+    margin-left:10px;
+}
+  
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
 
 .fa-google-plus {
     font-size: 1.3em;
 }
 
+.footer {
+    bottom: 0;
+    background-color: #efefef;
+    z-index: -9999;
+}
+
+/********** 
+2. Carousel 
+***********/
 .child:hover {
 transform: scale(1.1);
 transition: all .5s;
@@ -23,6 +56,44 @@ transition: all .5s;
     transition: all .3s;
 }
 
+.owl-next {
+    position:relative!important;
+    float:right;
+    left: 50px!important;
+}
+
+.owl-prev {
+    position:relative!important;
+    float:left;
+    right: 50px!important;
+}
+
+.carousel-controls {
+    overflow: hidden;
+    position: absolute;
+    top: 35%;
+    z-index: 1;
+}
+
+.carousel-article {
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+    z-index: 1;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+
+h5 {
+    font-size: 20px;
+    color: #f5f5f5;
+    font-weight: 900;
+}
+/*********** 
+3. trending cards 
+*************/
 .trending-hashtag {
     float: right;
 }
@@ -31,60 +102,32 @@ transition: all .5s;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     background-color: #f1f1f1;
-  }
+}
 
 .tab-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: left;
     background-color: #f1f1f1;
-  }
+}
 
-  .footer {
-    bottom: 0;
-    background-color: #efefef;
-    z-index: -9999;
-  }
-
-  .alert {
+.alert {
     margin-bottom: 0;
-  }
+}
 
-  .card:hover {
-      background-color: rgba(255, 255, 255, 1);
-  }
+.card:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
 
-  .tab-card:hover {
-      background-color: rgba(255, 255, 255, 1);
-  }
-
-  .owl-next {
-      position:relative!important;
-      float:right;
-      left: 48px!important;
-  }
-
-  .owl-prev {
-        position:relative!important;
-        float:left;
-        right: 48px!important;
-    }
-
-  .carousel-controls {
-      overflow: hidden;
-      position: absolute;
-      top: 35%;
-      z-index: 1;
-  }
-
-  .tab {
+/******* 
+4. Tab navigation 
+*********/
+.tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
     justify-content: center;
-  }
-  
-  /* Style the buttons that are used to open the tab content */
-  .tab button {
+    margin-bottom: 20px;
+}
+
+.tab button {
     background-color: inherit;
     float: left;
     border: none;
@@ -93,24 +136,101 @@ transition: all .5s;
     padding: 14px 16px;
     transition: 0.3s;
     width: 25%;
-    font-family: franklin-gothic-urw,proxima-nova,helvetica neue,helvetica,Arial,sans-serif
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-    color: teal;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
+    font-family: 'Lilita One';
+    font-size: 24px;
+    border-radius: 20px;
+    color: #595959;
+    letter-spacing: 2px;
+}
+
+.tab button:hover {
+    background-color: turquoise;
+}
+
+.tab button.active {
     background-color: #ccc;
-  }
-  
-  /* Style the tab content */
-  .tabcontent {
+}
+
+.tabcontent {
     display: none;
-    padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-  }
+}
+
+.tab-card:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.tab-card {
+    display: block;
+    margin-bottom: 20px;
+}
   
+.tab-card img {
+    margin-right: 10px;
+    vertical-align: baseline;
+}
+.information {
+    display: inline-block;
+    float: right;
+    width:400px;
+    padding: 20px;
+}
+.tabContainer{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+/******
+5. Intro 
+*******/
+.intro_item:hover {
+    background-color: teal;
+}
+.intro_body
+{
+	padding-left: 39px;
+	padding-top: 33px;
+	padding-bottom: 39px;
+}
+.intro_item
+{
+	background: #f5f5f5;
+}
+.intro
+{
+	width: 100%;
+	background: #FFFFFF;
+	padding-bottom: 67px;
+}
+.intro_item
+{
+	width: calc((100% - 60px) / 2);
+	background: #f3f7f9;
+	margin-bottom: 48px;
+}
+.intro_image
+{
+	width: 100%;
+}
+.intro_image img
+{
+	max-width: 100%;
+}
+.intro_title a
+{
+	font-size: 24px;
+    color: #4c4c4c;
+}
+.intro_item:hover .intro_title a,
+.intro_item:hover .intro_subtitle
+{
+	color: #FFFFFF;
+}
+.intro_subtitle
+{
+	font-size: 14px;
+	font-weight: 500;
+	color: #888888;
+	margin-top: -1px;
+	padding-left: 1px;
+}

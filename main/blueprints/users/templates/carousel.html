@@ -6,15 +6,22 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-md-12 row">
-        <div class="col-md-12 carousel-btn">
+
+<div class="row">
+        <div class="col-md-12 carousel-btn p-0">
           <div class="cold-md-12 owl-carousel">
-            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
-            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
-            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
-            <div class="item"><h4><img class="child" src="http://wallpaperstock.net/2014-bmw-m4-coupe-motion-front_wallpapers_43885_1920x1080.jpg" class="d-block w-100" alt="BMW M4"></h4></div>
+            {% for result in results[:8] %}
+            <div class="item">
+              <a href="{{result['link']}}">
+                <img height="300px" src="{{result['image']}}" class="child d-block w-100 carousel-article" alt="{{result['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
+                <div class="bottom-left">
+                <h5><strong>{{result['title']}}</strong></h5>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
           </div>
-          <div class="container-fluid border border-danger carousel-controls">
+          <div class="container-fluid carousel-controls">
                 <button type="button" role="presentation" class="btn btn-primary owl-prev"><</button>
                 <button type="button" role="presentation" class="btn btn-primary owl-next">></button>
           </div>
@@ -26,111 +33,113 @@
           <div class="col-md-9 main-container border border-primary tabContainer">
                 <div class="tab">
                         <button class="tablinks active" onclick="openTab(event, 'Fashion')" id="defaultOpen">Fashion</button>
-                        <button class="tablinks" onclick="openTab(event, 'Tech')">Tech</button>
+                        <button class="tablinks" onclick="openTab(event, 'Technology')">Technology</button>
                         <button class="tablinks" onclick="openTab(event, 'Beauty')">Beauty</button>
                         <button class="tablinks" onclick="openTab(event, 'Lifestyle')">Lifestyle</button>
                       </div>
                       
                       <!-- Tab content -->
                       <div id="Fashion" class="tabcontent">
-                        <div class="tab-card" style="display: block">
-                            <h3>Fashion</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
+                      {% for result in results %}
+                        {% if result['category']=='Fashion' %}
+                          <div class="tab-card d-flex justify-content-between">
+                            
+                              <a href="{{result['link']}}">
+                                <div class="d-inline">
+                                  <img width="280px" height="200px" src="{{result['image']}}" />
+                                </div>
+                                <div class="information d-inline" style="text-align: left">
+                                    <p>{{result['title']}}</p>
+                                    <p>{{result['desc']}}</p>
+                                    <p>{{result['category']}}</p>
+                                  </div>  
+                              </a>
+                            
+                          </div>     
+                            {% endif %}
+                          {% endfor %}
                       </div>
                       
                       <div id="Beauty" class="tabcontent" style="display: none">
-                        <div class="tab-card">
-                            <h3>Beauty</h3>
-                            <p>Some text</p>
+                          {% for result in results %}
+                          {% if result['category']=='Beauty' %}
+                            <div class="tab-card">
+                              
+                                <a href="{{result['link']}}">
+                                    <img width="220px" height="140px" src="{{result['image']}}" />
+                                    <div class="information">
+                                      <p>{{result['title']}}</p>
+                                      <p>{{result['desc']}}</p>
+                                      <p>{{result['category']}}</p>
+                                    </div>  
+                                </a>
+                              
+                            </div>     
+                              {% endif %}
+                            {% endfor %}
                         </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                      </div>
                       
-                      <div id="Tech" class="tabcontent">
-                        <div class="tab-card">
-                            <h3>tech</h3>
-                            <p>Some text</p>
+                      <div id="Technology" class="tabcontent">
+                          {% for result in results %}
+                          {% if result['category']=='Technology' %}
+                            <div class="tab-card">
+                              
+                                <a href="{{result['link']}}">
+                                    <img width="220px" height="140px" src="{{result['image']}}" />
+                                    <div class="information">
+                                      <p>{{result['title']}}</p>
+                                      <p>{{result['desc']}}</p>
+                                      <p>{{result['category']}}</p>
+                                    </div>  
+                                </a>
+                              
+                            </div>     
+                              {% endif %}
+                            {% endfor %}
                         </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                      </div>
 
-                      <div id="Lifestyle" class="tabcontent">
-                        <div class="tab-card">
-                            <h3>Lifestyle</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                        <div class="tab-card">
-                            <h3>Card 1</h3>
-                            <p>Some text</p>
-                        </div> 
-                      </div>
-              
-                
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
-            <h1>Main Content Box</h1>
+                <div id="Lifestyle" class="tabcontent">
+                  {% for result in results %}
+                  {% if result['category']=='Lifestyle' %}
+                    <div class="tab-card">
+                      
+                        <a href="{{result['link']}}">
+                            <img width="220px" height="140px" src="{{result['image']}}" />
+                            <div class="information">
+                              <p>{{result['title']}}</p>
+                              <p>{{result['desc']}}</p>
+                              <p>{{result['category']}}</p>
+                            </div>  
+                        </a>
+                      
+                    </div>     
+                      {% endif %}
+                    {% endfor %}
+                </div>
           </div>
           <div class="col-md-3 p-0 border border-danger sticky-top trending-hashtag">
-              <div class="column">
-                <div class="card">
-                  <h3>Card 1</h3>
-                  <p>Some text</p>
-                </div>
+              <div class="container">
+                <div class="fa fa-twitter" style="float: left"></div>
+                <h4>Twitter Tag</h4> 
+                  <ul>
+                    {% for tag in twitter_tag[:20] %}
+                        <li>{{tag}}</li>
+                    {% endfor %}
+                  </ul>
               </div>
-            
-              <div class="column">
-                <div class="card">
-                  <h3>Card 2</h3>
-                  <p>Some text</p>
+              <div class="container">
+                <div>
+                  <i class="fab fa-instagram"></i>
                 </div>
-              </div>
-              
-              <div class="column">
-                <div class="card">
-                  <h3>Card 3</h3>
-                  <p>Some text</p>
-                </div>
-              </div>
-              
-              <div class="column">
-                <div class="card">
-                  <h3>Card 4</h3>
-                  <p>Some text</p>
-                </div>
+                <h4>Insta Tag</h4> 
+                  <ul>
+                    {% for tag in insta_tag[:20] %}
+                        <li>{{tag}}</li>
+                    {% endfor %}
+                  </ul>
               </div>
           </div>
         </div>
-      </div>
-      
       
       <script
         src="http://code.jquery.com/jquery-3.3.1.js"

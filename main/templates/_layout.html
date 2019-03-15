@@ -105,11 +105,10 @@
 
             <ul class="navbar-nav">
               {% if current_user.is_authenticated %}              
-                <!-- <label class="nav-link" for="username">Welcome, {{current_user.username}} </label> -->
                 <a class="nav-link" href="#" data-toggle="modal" data-target="#upload">Images</a>
-                <a class="nav-link" href="#">Tips</a>
+                <a class="nav-link" href="{{url_for('marketings.show')}}">Tips</a>
                 <a class="nav-link" href="{{url_for('users.show',username=current_user.username)}}">Profile</a>
-                <a class="nav-link" href="{{url_for('users.edit',id=current_user.id)}}">Setting</a>
+                <a class="nav-link" href="{{url_for('users.edit',id=current_user.id)}}">Preference</a>
                 <a class="nav-link" href="{{url_for('sessions.logout')}}">Logout</a>
               {% else %}
                 <a class="nav-link" href="{{url_for('sessions.login')}}">Log In</a>

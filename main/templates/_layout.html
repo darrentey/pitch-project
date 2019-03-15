@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="../css/filename.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css ">
-    <link href="https://fonts.googleapis.com/css?family=Lilita+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lilita+One|Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% assets "home_css" %}
       <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
@@ -90,10 +91,7 @@
 
     </div>  
 
-        {%block bodyhead%}
-        {%endblock%}
-
-        <div class="container-fluid mt-5 p-0">
+        <div class="container-fluid mt-5">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}

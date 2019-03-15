@@ -13,7 +13,7 @@
             {% for result in results[:8] %}
             <div class="item">
               <a href="{{result['link']}}">
-                <img height="300px" src="{{result['image']}}" class="child d-block w-100 carousel-article" alt="{{result['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
+                <img height="300px" src="{{result['image']}}" class="child darken d-block w-100 carousel-article" alt="{{result['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
                 <div class="bottom-left">
                 <h5><strong>{{result['title']}}</strong></h5>
                 </div>
@@ -30,7 +30,7 @@
       
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-9 main-container border border-primary tabContainer">
+          <div class="col-md-9 main-container tabContainer">
                 <div class="tab">
                         <button class="tablinks active" onclick="openTab(event, 'Fashion')" id="defaultOpen">Fashion</button>
                         <button class="tablinks" onclick="openTab(event, 'Technology')">Technology</button>
@@ -117,7 +117,7 @@
                     {% endfor %}
                 </div>
           </div>
-          <div class="col-md-3 p-0 border border-danger sticky-top trending-hashtag">
+          <div class="col-md-3 p-0 sticky-top trending-hashtag">
               <div class="container">
                 <div class="fa fa-twitter" style="float: left"></div>
                 <h4>Twitter Tag</h4> 
@@ -128,9 +128,7 @@
                   </ul>
               </div>
               <div class="container">
-                <div>
-                  <i class="fab fa-instagram"></i>
-                </div>
+                <div class="fa fa-instagram" style="float: left"></div>
                 <h4>Insta Tag</h4> 
                   <ul>
                     {% for tag in insta_tag[:20] %}

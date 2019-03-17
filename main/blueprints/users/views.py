@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template,request,url_for,redirect,flash
 from models.user import User
-from forms import RegistrationForm
+from forms import RegistrationForm,LoginForm
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin,LoginManager,login_required,logout_user,login_user,current_user
 from models.preference import Preference
@@ -14,31 +14,12 @@ users_blueprint = Blueprint('users',
                             template_folder='templates/')
 
 
-
-@users_blueprint.route("/register", methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(
-            username=form.username.data,
-            email=form.email.data,
-            password=form.password.data
-        )
-        user.save()
-        login_user(user)
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('users.show',username=user.username))
-    return render_template('signup.html', form=form)
-
 @users_blueprint.route("/<username>", methods=['GET'])
+@login_required
 def show(username):
     insta_tag = General.get(name='instagram').contents
     twitter_tag = General.get(name='twitter').contents
-    calendar = General.get(name='calendar').contents
     p_list = User_Preference.get_or_none(User_Preference.user==current_user.id)
-    events = []
-    for event in calendar:
-        events.append(json.loads(event))
     if p_list:
         results = []
         p_id = User_Preference.select(User_Preference.preference).where(User_Preference.user==current_user.id)
@@ -49,7 +30,7 @@ def show(username):
                 json_article['category']=preference.categories
                 results.append(json_article)
         shuffle(results)
-        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag,events=events) 
+        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
     else:
         results = []
         preferences = Preference.select()
@@ -59,9 +40,9 @@ def show(username):
                 json_article['category']=preference.categories
                 results.append(json_article)
         shuffle(results)
-        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag,events=events) 
+        return render_template('show.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag) 
 
-@users_blueprint.route("/edit/<int:id>", methods=['GET'])
+@users_blueprint.route("/preferences/<int:id>", methods=['GET'])
 @login_required
 def edit(id):
     if current_user.id==id:
@@ -93,6 +74,7 @@ def update(id):
     return render_template('401.html'), 401 
 
 @users_blueprint.route("/carousel",methods=['GET'])
+@login_required
 def carousel():
     insta_tag = General.get(name='instagram').contents
     twitter_tag = General.get(name='twitter').contents

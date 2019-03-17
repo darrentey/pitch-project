@@ -81,32 +81,21 @@
 </div>
 {% endfor %}
 <h3>Instagram tag</h3>
-<ul>
+<ul style="text-decoration: none">
 {% for tag in insta_tag[:20] %}
+  <a href="https://www.instagram.com/explore/tags/{{tag[1:]}}">
     <li>{{tag}}</li>
+  </a>
 {% endfor %}
 </ul>
 <h3>Twitter tag</h3>
 <ul>
 {% for tag in twitter_tag[:20] %}
-    <li>{{tag}}</li>
+    <a href="https://twitter.com/hashtag/{{tag[1:]}}">
+      <li>{{tag}}</li>
+    </a>
 {% endfor %}
 </ul>
-<table class="table table-light w-50">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Event</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for event in events %}
-      <tr>
-        <td>{{event['date']}}</td>
-        <td>{{event['event']}}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
 {% endblock %}
 

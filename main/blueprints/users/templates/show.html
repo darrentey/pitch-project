@@ -10,11 +10,16 @@
 </style>{% endblock%}
 {% block content %}
 
-<div class="intro container-fluid">
+<div class="intro container-fluid border border-success">
+
+    <div class="typewriter">
+        <h2>Articles</h2>
+      </div>
+
   <div class="row">
 
-    <div class="col-md-9 main-container intro_content d-flex flex-wrap justify-content-between">
-      {% for result in results[:40] %}
+    <div class="col-md-12 border border-primary main-container intro_content d-flex flex-wrap justify-content-between">
+      {% for result in results[:20] %}
       <div class="intro_item">
         <a href="{{result['link']}}">
           <div class="intro_image">
@@ -45,14 +50,5 @@
       {% endfor %}
     </div>
     
-
-  </div>
-
-  
-              
-</div>
-
-
-
 {% endblock %}
 

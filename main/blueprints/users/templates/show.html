@@ -13,7 +13,7 @@
 <div class="intro container-fluid border border-success">
 
     <div class="typewriter">
-        <h2>Articles</h2>
+        <h2 class="articles"></h2>
       </div>
 
   <div class="row">
@@ -25,30 +25,52 @@
           <div class="intro_image">
             <img src="{{result['image']}}" alt="{{result['title']}}">
           </div>
-        
-        <div class="intro_body">
-          <div class="intro_subtitle">
-            <p>{{result['category']}}</p>
-          </div>
-          <div class="intro_title">
-            <p>{{result['title']}}</p>
-          </div>
-          {% if result['desc'] %}
-            {% if result['desc']|length < 100 %}
-            <div class="intro_subtitle">
-              <p>{{result['desc']}}</p>
+        </a>
+          <div class="intro_body">
+            <div class="intro_title">
+              {% if result['category'] == 'Technology' %}
+                <p style="color: #00BFFF; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+              {% elif result['category'] == 'Beauty' %}
+              <p style="color: #FFB6C1; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+              {% elif result['category'] == 'Lifestyle' %}
+              <p style="color: #9ACD32; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+              {% endif %}
             </div>
-            {% else %}
             <div class="intro_subtitle">
-              <p>{{(result['desc'])[:100]}}...</p>
+              <p>{{result['title']}}</p>
+              {% if result['desc'] %}
+                {% if result['desc']|length < 100 %}
+                  <p>{{result['desc']}}</p>
+                {% else %}
+                  <p>{{(result['desc'])[:150]}}...</p>
+                {% endif %}
+              {% endif %}
             </div>
-            {% endif %}
-          {% endif %}
+          </div>
         </div>
         </a>
       </div>
       {% endfor %}
     </div>
-    
+    <script>
+      const texts = ['CONTENT ARTICLES'];
+      let count = 0;
+      let index = 0;
+      let currentText = '';
+      let letter = '';
+      (function type(){
+        if(count===texts.length){
+          count=0;
+        }
+        currentText = texts[count];
+        letter = currentText.slice(0,++index);
+        document.querySelector(".articles").textContent = letter;
+        if(letter.length === currentText.length){
+          count++;
+          index=0;
+        }
+        setTimeout(type,250);
+      })();
+    </script>
 {% endblock %}
 

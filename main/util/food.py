@@ -24,11 +24,11 @@ def scrape_fb2():
         for img in div.find_all('img'):
             for p in div.find_all('p'):
                 food_result.append(json.dumps({
-                        'title':div.find('h2').get_text(),
-                        'link':url+div.find('a')['href'],
-                        'image':url+img.get('src'),
-                        'desc':p.get_text(strip=True),
-                    }))
+                    'title':div.find('h2').get_text(),
+                    'link':url+div.find('a')['href'],
+                    'image':url+img.get('src'),
+                    'desc':p.get_text(strip=True),
+                }))
     print(food_result)
 
 # multiple printed items
@@ -40,11 +40,11 @@ def scrape_fb3():
             for a in div.find_all('a'):
                 if link not in check:
                     food_result.append(json.dumps({
-                                'title':div.find('div', class_='info_title').get_text(strip=True),
-                                'link':a['href'],
-                                'image':img.get('data-src'),
-                                'desc':a.get_text(strip=True),
-                            }))
+                        'title':div.find('div', class_='info_title').get_text(strip=True),
+                        'link':a['href'],
+                        'image':img.get('data-src'),
+                        'desc':a.get_text(strip=True),
+                    }))
                 else:
                     return
     print(food_result)
@@ -56,9 +56,9 @@ def scrape_fb4():
         for img in div.find_all('img'):
             for a in div.find_all('a'):
                 food_result.append(json.dumps({
-                                'title':a['title'],
-                                'link':a['href'],
-                                'image':img.get('src'),
-                                'desc':div.find('div', class_='td-excerpt').get_text(strip=True),
-                            }))
+                    'title':a['title'],
+                    'link':a['href'],
+                    'image':img.get('src'),
+                    'desc':div.find('div', class_='td-excerpt').get_text(strip=True),
+                }))
     print(food_result)

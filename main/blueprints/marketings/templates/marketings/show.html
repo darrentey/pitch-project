@@ -22,23 +22,64 @@
         transform: scale(1.05);
         box-shadow: 2px 2px 2px #000;
     }
+    #calendar{
+        position: fixed;
+        right:0;
+        height:88vh;
+        overflow-y: scroll;
+        padding:0 0;
+        font-size: 14px;
+    }
+    thead{
+        background:#595959;
+        color: white;
+        font-weight:700;
+    }
+    #calendar a{
+        text-decoration:underline;
+        color:black!important;
+    }
+    tbody tr:hover{
+        background:rgb(184, 255, 248);
+    }
 </style>
 {% endblock%}
 {% block content %}
-<div class="card-columns">
-    {% for result in results %}
-    <div class="card">
-        <a href="{{result['link']}}">
-            <img src='{{result["image"]}}' class="card-img-top" alt="">
-        </a>
-        <a href="{{result['link']}}">
-            <div class="card-body">
-                <h5 class="card-title">{{result['title']}}</h5>
+<div class="row">
+    <div class="col-9">
+        <div class="card-columns">
+            {% for result in results %}
+            <div class="card">
+                <a href="{{result['link']}}">
+                    <img src='{{result["image"]}}' class="card-img-top" alt="">
+                </a>
+                <a href="{{result['link']}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{result['title']}}</h5>
+                    </div>
+                </a>
+                <p style="font-size:15px" class="card-text px-4 pb-5">{{result['desc']}}</p>
             </div>
-        </a>
-        <p style="font-size:15px" class="card-text px-4 pb-5">{{result['desc']}}</p>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
+    <div id='calendar' class="col-3">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">MARCH</th>
+                    <th scope="col">EVENT</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr>
+                    <td>{{event['date']}}</td>
+                    <td><a href="https://twitter.com/hashtag/{{event['event']}}">{{event['event']}}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-    
 {% endblock %}

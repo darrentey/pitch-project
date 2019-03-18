@@ -1,15 +1,5 @@
 
-h4 {
-    font-family: 'Lilita One', 'Concert One', Arial, Helvetica, sans-serif;
-    text-align: center;
-    color: #595959;
-    letter-spacing: 2px;
-    padding: 18px;
-    margin-right: 20px;
-}
-h5 {
-    text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black, 0.05em 0.05em black;
-}
+
 .fa {
     padding: 10px;
     font-size: 30px;
@@ -58,10 +48,7 @@ transform: scale(1.1);
 transition: all .5s;
 }
 
-.child {
-    width: 250px;
-    opacity: 0.8;
-  }
+
 
 .carousel-btn:hover .owl-prev {
     transform: translate(48px, 0);
@@ -103,11 +90,7 @@ transition: all .5s;
     left: 16px;
   }
 
-h5 {
-    font-size: 1em;
-    color: #f5f5f5;
-    font-weight: 900;
-}
+
 /*********** 
 3. trending cards 
 *************/
@@ -150,12 +133,12 @@ h5 {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 8px 8px;
     transition: 0.3s;
-    width: 25%;
+    margin: 0 5px;
+    width: 15%;
     font-family: 'Lilita One';
-    font-size: 24px;
-    border-radius: 20px;
+    font-size: 20px;
     color: #595959;
     letter-spacing: 2px;
 }
@@ -217,11 +200,13 @@ h5 {
 }
 
 .tab-card {
-    display: block;
+    display: inline-block;
     margin-bottom: 20px;
+    vertical-align: middle;
 }
   
 .tab-card img {
+    height:100%;
     margin-right: 10px;
     vertical-align: baseline;
 }
@@ -248,7 +233,7 @@ h5 {
 	padding-right: 50px;
 }
 
-.intro_item:hover {
+.intro_body:hover {
     background-color: teal;
 }
 .intro_body
@@ -277,10 +262,12 @@ h5 {
 .intro_image
 {
     width: 100%;
+    display:flex;
+    justify-content: center;
 }
 .intro_image img
 {
-    width: 100%;
+    width: 80%;
     height: 240px;
 }
 .intro_title a

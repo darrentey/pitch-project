@@ -8,12 +8,13 @@ from main.util.lifestyle import *
 from models.user_preference import User_Preference
 from flask_login import current_user
 from main.util.general import *
+from main.util.sport import *
 
 preferences_blueprint = Blueprint('preferences',
                             __name__,
                             template_folder='templates/')
 
-from main.util.general import *
+
 @preferences_blueprint.route("/general")
 def general():
     insta_tag()
@@ -88,8 +89,25 @@ def lifestyle_job():
     scrape_l10()
     Preference.update(articles=lifestyle_result).where(Preference.categories=='Lifestyle').execute()
     return redirect(url_for('home'))
+
+@preferences_blueprint.route("/sport")
+def sport_job():
+    scrape_s1()
+    scrape_s2()
+    scrape_s3()
+    scrape_s4()
+    scrape_s5()
+    scrape_s6()
+    scrape_s7()
+    scrape_s8()
+    scrape_s9()
+    scrape_s10()
+    scrape_s11()
+    scrape_s12()
+    Preference.update(articles=sport_result).where(Preference.categories=='Sport').execute()
+    return redirect(url_for('home'))
     
-@preferences_blueprint.route("/new/<int:id>",methods=['POST'])
+@preferences_blueprint.route("/add/<int:id>",methods=['POST'])
 def add(id):
     preference =  Preference.get(id=id)
     add = User_Preference(user=current_user.id,preference=id)

@@ -1,0 +1,240 @@
+{% extends "_layout.html" %}
+{% block title %}
+  Log In/Sign Up
+{% endblock %}
+{% block css %}
+<style>
+    body{
+        background: #d9d9d9;
+        height:100vh;
+        min-height:550px;
+        overflow-y: hidden;
+    }
+    .login-reg-panel{
+        top: 55%;
+        position:absolute;
+        transform: translateY(-50%);
+        text-align:center;
+        width:70%;
+        right:0;left:0;
+        margin:auto;
+        height:400px;
+        border-radius:5px;
+        background-color: rgba(30,30,30, 0.9);
+    }
+    .white-panel{
+        background-color: rgba(255,255, 255, 1);
+        height:500px;
+        position:absolute;
+        top:-50px;
+        width:50%;
+        right:calc(50% - 50px);
+        transition:.3s ease-in-out;
+        z-index:0;
+        border-radius:5px;
+    }
+    .login-reg-panel input[type="radio"]{
+        position:relative;
+        display:none;
+    }
+    .login-reg-panel{
+        color:#B8B8B8;
+    }
+    .login-reg-panel #label-login, 
+    .login-reg-panel #label-register{
+        border:1px solid #9E9E9E;
+        padding:5px 5px;
+        width:150px;
+        display:block;
+        text-align:center;
+        border-radius:3px;
+        cursor:pointer;
+    }
+    .login-info-box{
+        width:30%;
+        padding:0 50px;
+        top:20%;
+        left:0;
+        position:absolute;
+        text-align:left;
+    }
+    .register-info-box{
+        width:30%;
+        padding:0 50px;
+        top:20%;
+        right:0;
+        position:absolute;
+        text-align:center;
+    }
+    .right-log{right:50px !important;}
+    
+    .login-show, 
+    .register-show{
+        z-index: 1;
+        display:none;
+        opacity:0;
+        transition:0.3s ease-in-out;
+        color:#242424;
+        text-align:left;
+        padding:50px;
+    }
+    .show-log-panel{
+        display:block;
+        opacity:0.9;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="login-reg-panel">
+    <div class="login-info-box">
+        <h4 class='mb-4'>Already have an account?</h2>
+        <label id="label-register" for="log-reg-show">Login</label>
+        <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+    </div>
+                        
+    <div class="register-info-box">
+        <h4 class='mb-4'>Need an account?</h2>
+        <label id="label-login" for="log-login-show">Register</label>
+        <input type="radio" name="active-log-panel" id="log-login-show">
+    </div>
+                        
+    <div class="white-panel">
+        <div class="login-show">
+            <!-- login -->
+            <form method="POST" action="">
+                {{ log_form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-2"> Log In</legend>
+        
+                    <div class="form-group">
+                        {{ log_form.email.label(class="form-control-label") }}
+        
+                        {% if log_form.email.errors %}
+                        {{ log_form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in log_form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ log_form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ log_form.password.label(class="form-control-label") }}
+        
+                        {% if log_form.password.errors %}
+                        {{ log_form.password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in log_form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ log_form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-check">
+                        {{ log_form.remember(class="form-check-input") }}
+                        {{ log_form.remember.label(class="form-check-label") }}
+                    </div>
+        
+                </fieldset>
+                <div class="form-group">
+                    {{ log_form.submit_log(class="btn",style="background:rgb(0, 190, 192);color:white")}}
+                    <a class="btn btn-danger" href="{{ url_for('sessions.google_login') }}"><i class="fab fa-google-plus test mr-2 my-auto text-white"></i>Sign in with Google</a>
+                </div>
+                <small class="text-muted">
+                    <a href="#">Forgot Password?</a>
+                </small>
+            </form>
+        </div>
+        <div class="register-show">
+            <!-- sign up -->
+            <form method="POST" action="">
+                {{ reg_form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-2">Join Today</legend>
+                    <!-- username -->
+                    <div class="form-group">
+                        {{ reg_form.username.label(class="form-control-label") }}
+                        {% if reg_form.username.errors %}
+                        {{ reg_form.username(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in reg_form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ reg_form.username(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <!-- email -->
+                    <div class="form-group">
+                        {{ reg_form.email.label(class="form-control-label") }}
+                        {% if reg_form.email.errors %}
+                        {{ reg_form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in reg_form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ reg_form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <!-- password -->
+                    <div class="form-group">
+                        {{ reg_form.password.label(class="form-control-label") }}
+                        {% if reg_form.password.errors %}
+                        {{ reg_form.password(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in reg_form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ reg_form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ reg_form.submit_reg(class="btn",style="background:rgb(0, 190, 192);color:white")}}
+                    <a class="btn btn-danger" href="{{ url_for('sessions.google_login') }}"><i class="fab fa-google-plus test mr-2 my-auto text-white"></i>Sign up with Google</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    $(document).ready(function(){
+    $('.login-info-box').fadeOut();
+    $('.login-show').addClass('show-log-panel');
+    });
+
+    $('.login-reg-panel input[type="radio"]').on('change', function() {
+    if($('#log-login-show').is(':checked')) {
+        $('.register-info-box').fadeOut(); 
+        $('.login-info-box').fadeIn();
+        
+        $('.white-panel').addClass('right-log');
+        $('.register-show').addClass('show-log-panel');
+        $('.login-show').removeClass('show-log-panel');
+        
+    }
+    else if($('#log-reg-show').is(':checked')) {
+        $('.register-info-box').fadeIn();
+        $('.login-info-box').fadeOut();
+        
+        $('.white-panel').removeClass('right-log');
+        
+        $('.login-show').addClass('show-log-panel');
+        $('.register-show').removeClass('show-log-panel');
+    }
+    });
+</script>
+{% endblock %}
+
+
+

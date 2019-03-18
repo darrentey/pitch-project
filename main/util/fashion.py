@@ -31,18 +31,21 @@ def scrape_f2():
 
 def scrape_f3():
     soup = BeautifulSoup(urlopen('https://fashionmagazine.com/category/fashion'),'html.parser')
+    check = []
     for article in soup.find_all('article',class_='post-preview--landscape'):
         for div in article.find_all('div',class_='post-preview--landscape__header-wrap'):
             for a in div.find_all('a'):
                 link = a.get('href')
-                image = a.find('img')['src']
-                soup = BeautifulSoup(urlopen(link), 'html.parser')
-                for meta in soup.find_all('meta',attrs={'name':'description'}):
-                    desc = meta['content'] 
-        for div in article.find_all('div',class_='post-preview--landscape__content-wrap'):
-            for h2 in div.find_all('h2',class_='post-preview-title--landscape'):
-                title = h2.get_text().strip()
-        fashion_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+                if link not in check:
+                    soup = BeautifulSoup(urlopen(link), 'html.parser')
+                    for meta in soup.find_all('meta',attrs={'name':'description'}):
+                        desc = meta['content'] 
+                    for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                        image = meta['content']
+                    for meta in soup.find_all('meta',attrs={'property':'og:title'}):
+                        title = meta['content']
+                    check.append(link)
+                    fashion_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_f4():
     soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/fashion'),'html.parser')
@@ -53,10 +56,8 @@ def scrape_f4():
             soup = BeautifulSoup(urlopen(link), 'html.parser')
             for meta in soup.find_all('meta',attrs={'property':"og:description"}):
                 desc = meta['content'] 
-        for div in li.find_all('div',class_='c-card__image--square'):
-            for img in div.find_all('img'):
-                if img.get('data-src'):
-                    image = img.get('data-src')
+            for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                image = meta['content']
         for div in li.find_all('div',class_='c-card__header'):
             for span in div.find('span'):
                 title = span
@@ -106,7 +107,9 @@ def scrape_f8():
         for a in article.find_all('a'):
             for img in a.find_all('img'):
                 link = url+a.get('href') 
-                image = img.get('src')
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                    image = meta['content']
         for div in article.find_all('div'):
             for a in div.find_all('a'):
                 title = a.get_text()
@@ -132,12 +135,12 @@ def scrape_f10():
         for a in li.find_all('a',class_='entry'):
             link = a.get('href')
             title = a.get('title')
-            for img in a.find_all('img',class_='image-sm'):
-                image = img.get('data-src')
-                soup = BeautifulSoup(urlopen(link), 'html.parser')
-                for meta in soup.find_all('meta',attrs={'name':'description'}):
-                    desc = meta['content']
-                    fashion_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'name':'description'}):
+                desc = meta['content']
+            for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                image = meta['content']
+            fashion_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_f11():
     soup = BeautifulSoup(urlopen('https://www.glamourmagazine.co.uk/topic/fashion-trends'),'html.parser')
@@ -148,10 +151,8 @@ def scrape_f11():
             soup = BeautifulSoup(urlopen(link), 'html.parser')
             for meta in soup.find_all('meta',attrs={'name':'description'}):
                 desc = meta['content']
-        for div in li.find_all('div',class_='c-card__image--square'):
-            for img in div.find_all('img'):
-                if img.get('data-src'):
-                    image = img.get('data-src')
+            for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                image = meta['content']
         for div in li.find_all('div',class_='c-card__header'):
             for span in div.find('span'):
                 title = span

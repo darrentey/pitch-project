@@ -23,12 +23,13 @@ def scrape_s2():
     for li in soup.find_all('li',class_='media'):
         for figure in li.find_all('figure'):
             link = url + figure.find('a')['href']
-            image = figure.find('img')['src']
             soup = BeautifulSoup(urlopen(link), 'html.parser')
             for meta in soup.find_all('meta',attrs={'property':"og:description"}):
                 desc = meta['content'] 
             for meta in soup.find_all('meta',attrs={'property':"og:title"}):
                 title = meta['content']
+            for meta in soup.find_all('meta',attrs={'property':"og:image"}):
+                image = meta['content']
             sport_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_s3():

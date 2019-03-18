@@ -2,7 +2,29 @@
 {% block title %}
   Homepage
 {% endblock %}
-{% block header %}
+{% block css %}
+<style>
+  body{
+    background: #d9d9d9;
+  }
+  h4 {
+    font-family: 'Lilita One', 'Concert One', Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #595959;
+    letter-spacing: 2px;
+    padding: 18px;
+    margin-right: 20px;
+  }
+  h5 {
+    text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black, 0.05em 0.05em black;
+    font-size: 1em;
+    color: #f5f5f5;
+    font-weight: 600;
+  }
+  ul{
+    list-style: none;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -15,130 +37,173 @@
           <a href="{{result['link']}}">
             <img height="300px" src="{{result['image']}}" class="child darken d-block w-100 carousel-article" alt="{{result['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
             <div class="bottom-left">
-            <h5><strong>{{result['title']}}</strong></h5>
+              <h5><strong>{{result['title']}}</strong></h5>
             </div>
           </a>
         </div>
         {% endfor %}
       </div>
       <div class="container-fluid carousel-controls">
-            <button type="button" role="presentation" class="btn btn-primary owl-prev"><</button>
-            <button type="button" role="presentation" class="btn btn-primary owl-next">></button>
+        <button type="button" role="presentation" class="btn btn-primary owl-prev"><</button>
+        <button type="button" role="presentation" class="btn btn-primary owl-next">></button>
       </div>
     </div>
 </div>
       
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-9 main-container tabContainer">
-                <div class="tab">
-                        <button class="tablinks active" onclick="openTab(event, 'Fashion')" id="defaultOpen">Fashion</button>
-                        <button class="tablinks" onclick="openTab(event, 'Technology')">Technology</button>
-                        <button class="tablinks" onclick="openTab(event, 'Beauty')">Beauty</button>
-                        <button class="tablinks" onclick="openTab(event, 'Lifestyle')">Lifestyle</button>
-                      </div>
-                      
-                      <!-- Tab content -->
-                      <div id="Fashion" class="tabcontent">
-                      {% for result in results %}
-                        {% if result['category']=='Fashion' %}
-                          <div class="tab-card d-flex justify-content-between">
-                            
-                              <a href="{{result['link']}}">
-                                <div class="d-inline">
-                                  <img width="280px" height="200px" src="{{result['image']}}" />
-                                </div>
-                                <div class="information d-inline" style="text-align: left">
-                                    <p>{{result['title']}}</p>
-                                    <p>{{result['desc']}}</p>
-                                    <p>{{result['category']}}</p>
-                                  </div>  
-                              </a>
-                            
-                          </div>     
-                            {% endif %}
-                          {% endfor %}
-                      </div>
-                      
-                      <div id="Beauty" class="tabcontent" style="display: none">
-                          {% for result in results %}
-                          {% if result['category']=='Beauty' %}
-                            <div class="tab-card">
-                              
-                                <a href="{{result['link']}}">
-                                    <img width="220px" height="140px" src="{{result['image']}}" />
-                                    <div class="information">
-                                      <p>{{result['title']}}</p>
-                                      <p>{{result['desc']}}</p>
-                                      <p>{{result['category']}}</p>
-                                    </div>  
-                                </a>
-                              
-                            </div>     
-                              {% endif %}
-                            {% endfor %}
-                        </div> 
-                      
-                      <div id="Technology" class="tabcontent">
-                          {% for result in results %}
-                          {% if result['category']=='Technology' %}
-                            <div class="tab-card">
-                              
-                                <a href="{{result['link']}}">
-                                    <img width="220px" height="140px" src="{{result['image']}}" />
-                                    <div class="information">
-                                      <p>{{result['title']}}</p>
-                                      <p>{{result['desc']}}</p>
-                                      <p>{{result['category']}}</p>
-                                    </div>  
-                                </a>
-                              
-                            </div>     
-                              {% endif %}
-                            {% endfor %}
-                        </div> 
-
-                <div id="Lifestyle" class="tabcontent">
-                  {% for result in results %}
-                  {% if result['category']=='Lifestyle' %}
-                    <div class="tab-card">
-                      
-                        <a href="{{result['link']}}">
-                            <img width="220px" height="140px" src="{{result['image']}}" />
-                            <div class="information">
-                              <p>{{result['title']}}</p>
-                              <p>{{result['desc']}}</p>
-                              <p>{{result['category']}}</p>
-                            </div>  
-                        </a>
-                      
-                    </div>     
-                      {% endif %}
-                    {% endfor %}
-                </div>
-          </div>
-          <div class="col-md-3 p-0 sticky-top trending-hashtag">
-              <div class="container">
-                <div class="fa fa-twitter" style="float: left"></div>
-                <h4>Twitter Tag</h4> 
-                  <ul>
-                    {% for tag in twitter_tag[:20] %}
-                        <li>{{tag}}</li>
-                    {% endfor %}
-                  </ul>
-              </div>
-              <div class="container">
-                <div class="fa fa-instagram" style="float: left"></div>
-                <h4>Insta Tag</h4> 
-                  <ul>
-                    {% for tag in insta_tag[:20] %}
-                        <li>{{tag}}</li>
-                    {% endfor %}
-                  </ul>
-              </div>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9 main-container tabContainer">
+        <div class="tab">
+          <button class="tablinks active" onclick="openTab(event, 'Fashion')" id="defaultOpen">Fashion</button>
+          <button class="tablinks" onclick="openTab(event, 'Beauty')">Beauty</button>
+          <button class="tablinks" onclick="openTab(event, 'Technology')">Technology</button>
+          <button class="tablinks" onclick="openTab(event, 'Sport')">Sport</button>
+          <button class="tablinks" onclick="openTab(event, 'Lifestyle')">Lifestyle</button>
+          <button class="tablinks" onclick="openTab(event, 'Food')">Food</button>
         </div>
-      
+                
+        <!-- Tab content -->
+        <div id="Fashion" class="tabcontent">
+          {% for result in results %}
+            {% if result['category']=='Fashion' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div>
+                    <div class="information d-inline" style="text-align: left">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div>
+                
+        <div id="Beauty" class="tabcontent" style="display: none">
+          {% for result in results %}
+            {% if result['category']=='Beauty' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div> 
+                    <div class="information d-inline" style="text-align: left">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div> 
+                
+        <div id="Technology" class="tabcontent">
+          {% for result in results %}
+            {% if result['category']=='Technology' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div>
+                    <div class="information">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div> 
+
+        <div id="Sport" class="tabcontent">
+          {% for result in results %}
+            {% if result['category']=='Sport' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div>
+                    <div class="information">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div id="Lifestyle" class="tabcontent">
+          {% for result in results %}
+            {% if result['category']=='Lifestyle' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div>
+                    <div class="information">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div id="Food" class="tabcontent">
+          {% for result in results %}
+            {% if result['category']=='Food' %}
+              <div class="tab-card d-flex justify-content-between">
+                  <a href="{{result['link']}}">
+                    <div class="d-inline">
+                      <img width="350px" src="{{result['image']}}" />
+                    </div>
+                    <div class="information">
+                      <p class="text-muted">{{result['category']}}</p>
+                      <p>{{result['title']}}</p>
+                      <p>{{result['desc']}}</p>
+                    </div>  
+                  </a>
+              </div>     
+            {% endif %}
+          {% endfor %}
+        </div>
+
+    </div>
+    <div class="col-md-3 p-0 sticky-top trending-hashtag">
+        <div class="container border rounded mb-2" style="background:white;">
+          <div class="fa fa-twitter" style="float: left"></div>
+          <h4 class="border-bottom">Twitter</h4> 
+            <ul>
+              {% for tag in twitter_tag[:20] %}
+                <a href="https://twitter.com/hashtag/{{tag[1:]}}">
+                  <li class='p-1'>{{tag}}</li>
+                </a>
+              {% endfor %}
+            </ul>
+        </div>
+        <div class="container border rounded mb-2" style="background:white;">
+          <div class="fa fa-instagram" style="float: left"></div>
+          <h4 class="border-bottom">Instagram</h4> 
+            <ul>
+              {% for tag in insta_tag[:20] %}
+                <a href="https://www.instagram.com/explore/tags/{{(tag[1:])}}">
+                  <li class="p-1">{{tag}}</li>
+                </a>
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+  </div>
+</div>
       <script
         src="http://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

@@ -73,9 +73,9 @@ def update(id):
         return render_template('edit.html',errors=user.errors,user=user)
     return render_template('401.html'), 401 
 
-@users_blueprint.route("/carousel",methods=['GET'])
+@users_blueprint.route("/",methods=['GET'])
 @login_required
-def carousel():
+def index():
     insta_tag = General.get(name='instagram').contents
     twitter_tag = General.get(name='twitter').contents
     results = []

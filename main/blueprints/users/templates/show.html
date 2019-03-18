@@ -5,97 +5,62 @@
 {% block css%}
 <style>
   body{
-    background: #f5f5f5;
+    background: #d9d9d9;
   }
-</style>{% endblock%}
+  a{
+    text-decoration: none!important;
+    color:black!important;
+  }
+  .intro_body:hover{
+    background: rgb(87, 190, 180);
+  }
+</style>
+{% endblock%}
 {% block content %}
 
-<div class="intro container-fluid border border-success">
-  <div class="row border border-danger">
+<div class="intro container-fluid">
+  <div class="row">
 
-    <div class="col-md-9 border border-primary main-container intro_content d-flex flex-wrap justify-content-between">
-      {% for result in results[:20] %}
+    <div class="col-md-9 main-container intro_content d-flex flex-wrap justify-content-between">
+      {% for result in results[:40] %}
       <div class="intro_item">
         <a href="{{result['link']}}">
           <div class="intro_image">
             <img src="{{result['image']}}" alt="{{result['title']}}">
           </div>
-        </a>
-          <div class="intro_body">
-            <div class="intro_title">
-              <p>{{result['title']}}</p>
-            </div>
-            <div class="intro_subtitle">
-                <p>{{result['category']}}</p>
-              </div>
+        
+        <div class="intro_body">
+          <div class="intro_subtitle">
+            <p>{{result['category']}}</p>
           </div>
+          <div class="intro_title">
+            <p>{{result['title']}}</p>
+          </div>
+          {% if result['desc'] %}
+            {% if result['desc']|length < 100 %}
+            <div class="intro_subtitle">
+              <p>{{result['desc']}}</p>
+            </div>
+            {% else %}
+            <div class="intro_subtitle">
+              <p>{{(result['desc'])[:100]}}...</p>
+            </div>
+            {% endif %}
+          {% endif %}
         </div>
-        {% endfor %}
+        </a>
+      </div>
+      {% endfor %}
     </div>
     
-    <div class="col-md-3 container border border-warning">
-        <table class="table table-light w-50">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Event</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for event in events %}
-            <tr>
-              <td>{{event['date']}}</td>
-              <td>{{event['event']}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% endblock %}
-    </div>
-    
+
   </div>
 
-    <h3>Instagram tag</h3>
-    <ul>
-      {% for tag in insta_tag[:20] %}
-      <li>{{tag}}</li>
-      {% endfor %}
-    </ul>
-    <h3>Twitter tag</h3>
-    <ul>
-      {% for tag in twitter_tag[:20] %}
-      <li>{{tag}}</li>
-      {% endfor %}
-    </ul>
+  
               
 </div>
 
-{% for result in results[:20] %}
-<div>
-    <a href="{{result['link']}}">
-        <p>{{result['title']}}</p>
-        <img src="{{result['image']}}" />
-        <p>{{result['desc']}}</p>
-    </a>
-    <p>{{result['category']}}</p>
-</div>
-{% endfor %}
-<h3>Instagram tag</h3>
-<ul style="text-decoration: none">
-{% for tag in insta_tag[:20] %}
-  <a href="https://www.instagram.com/explore/tags/{{tag[1:]}}">
-    <li>{{tag}}</li>
-  </a>
-{% endfor %}
-</ul>
-<h3>Twitter tag</h3>
-<ul>
-{% for tag in twitter_tag[:20] %}
-    <a href="https://twitter.com/hashtag/{{tag[1:]}}">
-      <li>{{tag}}</li>
-    </a>
-{% endfor %}
-</ul>
+
 
 {% endblock %}
 

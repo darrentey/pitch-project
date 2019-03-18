@@ -8,13 +8,13 @@ from main.util.lifestyle import *
 from models.user_preference import User_Preference
 from flask_login import current_user
 from main.util.general import *
-from main.util.sports import *
+from main.util.sport import *
 
 preferences_blueprint = Blueprint('preferences',
                             __name__,
                             template_folder='templates/')
 
-from main.util.general import *
+
 @preferences_blueprint.route("/general")
 def general():
     insta_tag()
@@ -42,7 +42,7 @@ def fashion_job():
     scrape_f9()
     scrape_f10()
     scrape_f11()
-    Preference.update(articles=fashion_result).where(Preference.categories=='Sports').execute()
+    Preference.update(articles=fashion_result).where(Preference.categories=='Fashion').execute()
     return redirect(url_for('home'))
 
 @preferences_blueprint.route("/tech")

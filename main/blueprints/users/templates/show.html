@@ -7,7 +7,8 @@
   body{
     background: #d9d9d9;
   }
-</style>{% endblock%}
+</style>
+{% endblock%}
 {% block content %}
 
 <div class="intro container-fluid">
@@ -18,68 +19,66 @@
 
   <div class="row">
 
-    <div class="col-md-12 main-container intro_content d-flex flex-wrap justify-content-between">
-      {% for result in results[:20] %}
-      <div class="intro_item">
-        <a href="{{result['link']}}">
-          <div class="intro_image shadow">
-            <img src="{{result['image']}}" alt="{{result['title']}}" style="background-size: cover;">
-          </div>
-      
-          <div class="intro_body shadow">
-            <div class="intro_title">
-              {% if result['category'] == 'Technology' %}
-                <p style="color: #00BFFF; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% elif result['category'] == 'Beauty' %}
-              <p style="color: #FFB6C1; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% elif result['category'] == 'Lifestyle' %}
-              <p style="color: #9ACD32; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% elif result['category'] == 'Fashion' %}
-              <p style="color: #d40ed4; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% elif result['category'] == 'Food' %}
-              <p style="color: rgb(236, 163, 28); font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% elif result['category'] == 'Sport' %}
-              <p style="color: rgb(216, 62, 62); font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
-              {% endif %}
-            </div>
-            <div class="intro_subtitle">
-              <p>{{result['title']}}</p>
-            </div>
-            <div class="intro_desc">
-              {% if result['desc'] %}
-                {% if result['desc']|length < 100 %}
-                  <p>{{result['desc']}}</p>
-                {% else %}
-                  <p>{{(result['desc'])[:150]}}...</p>
+      <div class="card-columns">
+          {% for result in results[:20] %}
+          <div class="card intro_body">
+              <a href="{{result['link']}}">
+                  <img src='{{result["image"]}}' class="card-img-top" alt="">
+              </a>
+              <a href="{{result['link']}}">
+                  <div class="card-body">
+                      {% if result['category'] == 'Technology' %}
+                      <p style="color: #00BFFF; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% elif result['category'] == 'Beauty' %}
+                      <p style="color: #FFB6C1; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% elif result['category'] == 'Lifestyle' %}
+                      <p style="color: #9ACD32; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% elif result['category'] == 'Fashion' %}
+                      <p style="color: #d40ed4; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% elif result['category'] == 'Food' %}
+                      <p style="color: rgb(236, 163, 28); font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% elif result['category'] == 'Sport' %}
+                      <p style="color: rgb(216, 62, 62); font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>
+                      {% endif %}
+                      <h5 class="card-title intro_subtitle">{{result['title']}}</h5>
+                  </div>
+              </a>
+              <div class="intro_desc">
+                {% if result['desc'] %}
+                  {% if result['desc']|length < 100 %}
+                  <p style="font-size:15px" class="card-text px-4 pb-5">{{result['desc']}}</p>
+                  {% else %}
+                    <p style="font-size:15px" class="card-text px-4 pb-5">{{(result['desc'])[:150]}}...</p>
+                  {% endif %}
                 {% endif %}
-              {% endif %}
             </div>
           </div>
-        </a>
+          {% endfor %}
       </div>
-        {% endfor %}
-      </div>
-    </div>
+          
+  </div>
 
-    <script>
-      const texts = ['CONTENT ARTICLES'];
-      let count = 0;
-      let index = 0;
-      let currentText = '';
-      let letter = '';
-      (function type(){
-        if(count===texts.length){
-          count=0;
-        }
-        currentText = texts[count];
-        letter = currentText.slice(0,++index);
-        document.querySelector(".articles").textContent = letter;
-        if(letter.length === currentText.length){
-          count++;
-          index=0;
-        }
-        setTimeout(type,250);
-      })();
-    </script>
+</div>
+
+<script>
+  const texts = ['CONTENT ARTICLES'];
+  let count = 0;
+  let index = 0;
+  let currentText = '';
+  let letter = '';
+  (function type(){
+    if(count===texts.length){
+      count=0;
+    }
+    currentText = texts[count];
+    letter = currentText.slice(0,++index);
+    document.querySelector(".articles").textContent = letter;
+    if(letter.length === currentText.length){
+      count++;
+      index=0;
+    }
+    setTimeout(type,250);
+  })();
+</script>
+
 {% endblock %}
-

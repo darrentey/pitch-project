@@ -97,7 +97,7 @@ def sport_job():
     scrape_s3()
     scrape_s4()
     scrape_s5()
-    scrape_s6()
+    # scrape_s6()
     scrape_s7()
     scrape_s8()
     scrape_s9()

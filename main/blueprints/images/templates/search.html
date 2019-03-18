@@ -20,7 +20,7 @@
     }
 
     .card-img-overlay {
-        display:none;
+        /*display:none;*/
         opacity: 0;
         transition: 0.6s;
     }
@@ -175,18 +175,10 @@
             }).cat
         }
         
-        function show(e) {
-            console.log(e.target.id)
-        }
-
-        function hide(e) {
-            console.log(e.target)
-        }
-
         function displayImages(images) {
             images.forEach(function(image, i) {
             $('#card-container').append(`
-                <div class="card bg-dark text-white" onclick="show(this)">
+                <div class="card bg-dark text-white">
                     <img class="card-img" src="${image.urls.regular}"/>
                     <div id="${i}" class="card-img-overlay">
                         <img src="${image.user.profile_image.small}" class="rounded-circle">
@@ -196,6 +188,15 @@
                 </div>
                 `)
             })
+
+            $('.card').mouseenter(function(e) {
+                e.target.classList.add('highlight')
+            })
+
+            $('.card').mouseleave(function(e) {
+                e.target.classList.remove('highlight')
+            })
+
         
             $('.download').click(function(e) {
             fetch(e.currentTarget.value + "?client_id={{unsplash}}",)
@@ -210,24 +211,12 @@
                 .catch(error => console.log(error))
             })
             
-            
-
-            //$('.card').mouseenter(function() {
-            //    $('.card-img-overlay').show();
-            //});
-            //$('.card').mouseleave(function() {
-            //    $('.card-img-overlay').hide();
-            //});
 
             $('.btn').hover(function() {
                 $(this).css('cursor', 'pointer');
             });
         }
             
-        addEventListener('mouseover',function(e) {
-            e.target.classList.toggle('highlight');
-        })
-
     </script>
 
 {% endblock %}

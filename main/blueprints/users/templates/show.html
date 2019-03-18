@@ -22,11 +22,11 @@
       {% for result in results[:20] %}
       <div class="intro_item">
         <a href="{{result['link']}}">
-          <div class="intro_image">
-            <img src="{{result['image']}}" alt="{{result['title']}}">
+          <div class="intro_image shadow">
+            <img src="{{result['image']}}" alt="{{result['title']}}" style="background-size: cover;">
           </div>
       
-          <div class="intro_body">
+          <div class="intro_body shadow">
             <div class="intro_title">
               {% if result['category'] == 'Technology' %}
                 <p style="color: #00BFFF; font-family:'Roboto Condensed'; font-size: 1.5em;" >{{result['category']}}</p>

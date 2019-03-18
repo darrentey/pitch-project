@@ -205,10 +205,12 @@ transition: all .5s;
     display: inline-block;
     margin-bottom: 20px;
     vertical-align: middle;
+    height: 225px;
 }
   
 .tab-card img {
-    height:100%;
+    /* height:100%; */
+    height: 225px;
     margin-right: 10px;
     vertical-align: baseline;
 }
@@ -262,13 +264,13 @@ transition: all .5s;
 }
 .intro_image
 {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: center;
 }
 .intro_image img
 {
-    width: 80%;
+    width: 100%;
     height: 220px;
 }
 

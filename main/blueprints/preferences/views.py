@@ -9,6 +9,7 @@ from models.user_preference import User_Preference
 from flask_login import current_user
 from main.util.general import *
 from main.util.sport import *
+from main.util.food import *
 
 preferences_blueprint = Blueprint('preferences',
                             __name__,
@@ -52,7 +53,7 @@ def tech_job():
     scrape_t3()
     scrape_t4()
     scrape_t5()
-    scrape_t6()
+    # scrape_t6()
     scrape_t7()
     scrape_t8()
     scrape_t9()
@@ -105,6 +106,21 @@ def sport_job():
     scrape_s11()
     scrape_s12()
     Preference.update(articles=sport_result).where(Preference.categories=='Sport').execute()
+    return redirect(url_for('home'))
+
+@preferences_blueprint.route("/food")
+def food_job():
+    scrape_fb1()
+    scrape_fb2()
+    scrape_fb3()
+    scrape_fb4()
+    # scrape_fb5()
+    # scrape_fb6()
+    # scrape_fb7()
+    # scrape_fb8()
+    # scrape_fb9()
+    # scrape_fb10()
+    Preference.update(articles=food_result).where(Preference.categories=='Food').execute()
     return redirect(url_for('home'))
     
 @preferences_blueprint.route("/add/<int:id>",methods=['POST'])

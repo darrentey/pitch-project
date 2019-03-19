@@ -38,10 +38,11 @@ def scrape_fb3():
     for div in soup.find_all('div', class_='col-xs-12 col-sm-6 col-md-6 item-post'):
         for img in div.find_all('img'):
             for a in div.find_all('a'):
+                link = a['href']
                 if link not in check:
                     food_result.append(json.dumps({
                         'title':div.find('div', class_='info_title').get_text(strip=True),
-                        'link':a['href'],
+                        'link':link,
                         'image':img.get('data-src'),
                         'desc':a.get_text(strip=True),
                     }))

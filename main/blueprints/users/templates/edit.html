@@ -107,11 +107,13 @@
             {% endif %}
         </div>
         <div class="swiper-pagination"></div>
+        <div id="next" class="swiper-button-next"></div>
+        <div id="prev" class="swiper-button-prev"></div>
     </div>
 </section>
 <!-- Swiper JS -->
 <script src="/static/js/swiper.min.js"></script>
-
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <!-- Initialize Swiper -->
 <script>
   var swiper = new Swiper('.swiper-container', {
@@ -128,7 +130,12 @@
     },
     pagination: {
       el: '.swiper-pagination',
-    },
-  });
+      clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
 </script>
 {% endblock %}

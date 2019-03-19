@@ -74,7 +74,13 @@
                     <div class="information d-inline" style="text-align: left">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -93,7 +99,13 @@
                     <div class="information d-inline" style="text-align: left">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -112,7 +124,13 @@
                     <div class="information">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -131,7 +149,13 @@
                     <div class="information">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -150,7 +174,13 @@
                     <div class="information">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -169,7 +199,13 @@
                     <div class="information">
                       <p class="text-muted">{{result['category']}}</p>
                       <p>{{result['title']}}</p>
-                      <p>{{result['desc']}}</p>
+                      {% if result['desc'] %}
+                        {% if result['desc']|length < 80 %}
+                          <p>{{result['desc']}}</p>
+                        {% else %}
+                          <p>{{(result['desc'])[:80]}}...</p>
+                        {% endif %}
+                      {% endif %}
                     </div>  
                   </a>
               </div>     
@@ -181,22 +217,24 @@
     <div class="col-md-3 p-0 sticky-top trending-hashtag">
         <div class="container border rounded mb-2" style="background:white;">
           <div class="fa fa-twitter" style="float: left"></div>
-          <h4 class="border-bottom">Twitter</h4> 
-            <ul>
+          <h4>Twitter</h4> 
+          <p class="border-bottom text-center">Top 20 trending hashtags</p> 
+            <ul class="pl-2 pr-5">
               {% for tag in twitter_tag[:20] %}
                 <a href="https://twitter.com/hashtag/{{tag[1:]}}">
-                  <li class='p-1'>{{tag}}</li>
+                  <li class="pb-1">{{tag}}</li>
                 </a>
               {% endfor %}
             </ul>
         </div>
         <div class="container border rounded mb-2" style="background:white;">
           <div class="fa fa-instagram" style="float: left"></div>
-          <h4 class="border-bottom">Instagram</h4> 
-            <ul>
+          <h4>Instagram</h4> 
+          <p class="border-bottom text-center">Top 20 popular hashtags</p> 
+            <ul class="pl-2 pr-5">
               {% for tag in insta_tag[:20] %}
                 <a href="https://www.instagram.com/explore/tags/{{(tag[1:])}}">
-                  <li class="p-1">{{tag}}</li>
+                  <li class="pb-1">{{tag}}</li>
                 </a>
               {% endfor %}
             </ul>

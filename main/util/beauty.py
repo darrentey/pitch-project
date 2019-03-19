@@ -10,12 +10,13 @@ def scrape_b1():
     url = 'https://www.elle.com'
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):
+            image = img.get('data-src')
+        for div2 in div.find_all('div',class_='full-item-dek'):
+            desc = div2.find('p').get_text()
             for a in div.find_all('a',class_='full-item-title'):
-                beauty_result.append(json.dumps({
-                    'title':a.get_text(),
-                    'link':url+div.find('a')['href'],
-                    'image':img.get('data-src')
-                }))
+                title = a.get_text()
+                link = url+div.find('a')['href']
+                beauty_result.append(json.dumps({'title':title,'link':link,'image': image,'desc':desc}))
 
 def scrape_b2():
     soup = BeautifulSoup(urlopen('https://www.instyle.com/beauty'), 'html.parser')
@@ -24,10 +25,15 @@ def scrape_b2():
         for img in article.find_all('div',class_='component lazy-image thumbnail'):
             h3 = article.find('h3')
             a_link = h3.find('a')
-            beauty_result.append(json.dumps({
-                'title': a_link.get_text(strip=True),
-                'link': url + a_link.get('href'),
-                'image': img.get('data-src')
+            link = url + a_link.get('href')
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                desc = meta['content'] 
+                beauty_result.append(json.dumps({
+                    'title': a_link.get_text(strip=True),
+                    'link': link,
+                    'image': img.get('data-src'),
+                    'desc':desc
                 }))
 
 def scrape_b3():
@@ -36,12 +42,16 @@ def scrape_b3():
     for div in soup.find_all('div', class_='l-row--full m-posts-item m-posts-item--'):
         for img in div.find_all('div', class_='m-img-lazy'):
             for a in div.find_all('h2'):
-                article_link = a.find('a')['href']
-                beauty_result.append(json.dumps({
-                    'title':a.get_text(strip=True),
-                    'link':url+article_link,
-                    'image':img.find('img').get('data-src')
-                }))
+                link = url+a.find('a')['href']
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                    desc = meta['content'] 
+                    beauty_result.append(json.dumps({
+                        'title':a.get_text(strip=True),
+                        'link':link,
+                        'image':img.find('img').get('data-src'),
+                        'desc':desc
+                    }))
 
 def scrape_b4():
     soup = BeautifulSoup(urlopen('https://fashionmagazine.com/beauty'),'html.parser')
@@ -50,20 +60,26 @@ def scrape_b4():
             for a in div.find_all('a'):
                 link = a.get('href')
                 image = a.find('img')['src']
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                    desc = meta['content'] 
         for div in article.find_all('div',class_='post-preview--portrait__content-wrap'):
             for h2 in div.find_all('h2',class_='post-preview-title--portrait'):
                 title = h2.get_text().strip()
-        beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        beauty_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
     for article in soup.find_all('article',class_='post-preview--landscape'):
         for div in article.find_all('div',class_='post-preview--landscape__header-wrap'):
             for a in div.find_all('a'):
                 link = a.get('href')
                 image = a.find('img')['src']
+                soup = BeautifulSoup(urlopen(link), 'html.parser')
+                for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                    desc = meta['content'] 
         for div in article.find_all('div',class_='post-preview--landscape__content-wrap'):
             for h2 in div.find_all('h2',class_='post-preview-title--landscape'):
                 title = h2.get_text().strip()
-        beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        beauty_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_b5():
     soup = BeautifulSoup(urlopen('https://www.gq-magazine.co.uk/topic/grooming'),'html.parser')
@@ -71,6 +87,9 @@ def scrape_b5():
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
             link = url+article.find('a')['href']
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                desc = meta['content'] 
         for div in li.find_all('div',class_='c-card__image--square'):
             for img in div.find_all('img'):
                 if img.get('data-src'):
@@ -78,7 +97,7 @@ def scrape_b5():
         for div in li.find_all('div',class_='c-card__header'):
             for span in div.find('span'):
                 title = span
-        beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        beauty_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_b6():
     soup = BeautifulSoup(urlopen('https://www.vogue.co.uk/topic/beauty'),'html.parser')
@@ -86,6 +105,9 @@ def scrape_b6():
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
             link = url+article.find('a')['href']
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                desc = meta['content'] 
         for div in li.find_all('div',class_='c-card__image--square'):
             for img in div.find_all('img'):
                 if img.get('data-src'):
@@ -93,7 +115,7 @@ def scrape_b6():
         for div in li.find_all('div',class_='c-card__header'):
             for span in div.find('span'):
                 title = span
-        beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        beauty_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_b7():
     soup = BeautifulSoup(urlopen('https://www.glamourmagazine.co.uk/topic/beauty-news'),'html.parser')
@@ -101,6 +123,9 @@ def scrape_b7():
     for li in soup.find_all('li',class_='c-card-section__card-listitem'):
         for article in li.find_all('article',class_='c-card--tg-article'):
             link = url+article.find('a')['href']
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                desc = meta['content'] 
         for div in li.find_all('div',class_='c-card__image--square'):
             for img in div.find_all('img'):
                 if img.get('data-src'):
@@ -108,19 +133,25 @@ def scrape_b7():
         for div in li.find_all('div',class_='c-card__header'):
             for span in div.find('span'):
                 title = span
-        beauty_result.append(json.dumps({'title':title,'link':link,'image':image}))
+        beauty_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 # need to fix image
 def scrape_b8():
     soup = BeautifulSoup(urlopen('https://www.self.com/beauty'),'html.parser')
     url = 'https://www.self.com/'
     for li in soup.find_all('li',class_='component-river-item'):
-        # for img in li.find_all('picture',class_='component-responsive-image'):
-            for a in li.find_all('a',class_='component-link river-item-content-item river-item-content-hed'):
+        for a in li.find_all('a',class_='component-link river-item-content-item river-item-content-hed'):
+            link = url+li.find('a')['href']
+            soup = BeautifulSoup(urlopen(link), 'html.parser')
+            for meta in soup.find_all('meta',attrs={'property':'og:description'}):
+                desc = meta['content'] 
+            for meta in soup.find_all('meta',attrs={'property':'og:image'}):
+                image = meta['content'] 
                 beauty_result.append(json.dumps({
                     'title':a.get_text(),
-                    'link':url+li.find('a')['href'],
-                    # 'image':img.get('data-src')
+                    'link':link,
+                    'image':image,
+                    'desc':desc
                 }))
 
 def scrape_b9():
@@ -129,10 +160,14 @@ def scrape_b9():
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):
             for a in div.find_all('a',class_='full-item-title'):
+                link = url+div.find('a')['href']
+            for div2 in div.find_all('div',class_='full-item-dek item-dek'):
+                desc = div2.find('p').get_text()
                 beauty_result.append(json.dumps({
                     'title':a.get_text(),
-                    'link':url+div.find('a')['href'],
-                    'image':img.get('data-src')
+                    'link':link,
+                    'image':img.get('data-src'),
+                    'desc':desc
                 }))
 
 def scrape_b10():
@@ -141,10 +176,12 @@ def scrape_b10():
     for div in soup.find_all('div',class_='full-item'):
         for img in div.find_all('img',class_='lazyimage'):
             for a in div.find_all('a',class_='full-item-title'):
+                link = url+div.find('a')['href']
+            for div2 in div.find_all('div',class_='full-item-dek item-dek'):
+                desc = div2.find('p').get_text()
                 beauty_result.append(json.dumps({
                     'title':a.get_text(),
-                    'link':url+div.find('a')['href'],
-                    'image':img.get('data-src')
+                    'link':link,
+                    'image':img.get('data-src'),
+                    'desc':desc
                 }))
-
-

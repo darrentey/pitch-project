@@ -149,7 +149,7 @@ def scrape_t9():
                     desc = meta['content']  
                 for meta in soup.find_all('meta',attrs={'property':"og:image"}):
                     image = meta['content']  
-            tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
+                    tech_result.append(json.dumps({'title':title,'link':link,'image':image,'desc':desc}))
 
 def scrape_t10():
     r = requests.get('http://feeds.bbci.co.uk/news/technology/rss.xml')

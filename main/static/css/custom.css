@@ -139,7 +139,7 @@ transition: all .5s;
     transition: 0.3s;
     margin: 0 5px;
     width: 15%;
-    font-family: 'Lilita One';
+    font-family: 'Lilita One'; (this one don't want and keep jinq wen)
     font-size: 20px;
     color: #595959;
     letter-spacing: 2px;

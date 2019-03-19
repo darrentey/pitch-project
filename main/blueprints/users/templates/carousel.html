@@ -31,13 +31,13 @@
 
 <div class="row">
     <div class="col-md-12 carousel-btn p-0">
-      <div class="cold-md-12 owl-carousel">
-        {% for result in results[:8] %}
+      <div class="container cold-md-12 owl-carousel">
+        {% for headline in headlines %}
         <div class="item">
-          <a href="{{result['link']}}">
-            <img height="300px" src="{{result['image']}}" class="child darken d-block w-100 carousel-article" alt="{{result['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
+          <a href="{{headline['link']}}">
+            <img height="300px" src="{{headline['image']}}" class="child darken d-block w-100 carousel-article" alt="{{headline['title']}}" style="background: rgba(0,0,0,0.25); z-index: 1;"/>
             <div class="bottom-left">
-              <h5><strong>{{result['title']}}</strong></h5>
+              <h5><strong>{{headline['title']}}</strong></h5>
             </div>
           </a>
         </div>
@@ -214,7 +214,7 @@
         </div>
 
     </div>
-    <div class="col-md-3 p-0 sticky-top trending-hashtag">
+    <div class="col-md-3 p-0 sticky-top trending-hashtag" style="max-width:255px;">
         <div class="container border rounded mb-2" style="background:white;">
           <div class="fa fa-twitter" style="float: left"></div>
           <h4>Twitter</h4> 
@@ -250,7 +250,7 @@
       <script>
         var owl = $('.owl-carousel');
         owl.owlCarousel({
-            items:4,
+            items:3,
             loop:true,
             margin:0,
             autoplay:true,

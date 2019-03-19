@@ -20,6 +20,7 @@ preferences_blueprint = Blueprint('preferences',
 def general():
     insta_tag()
     twitter_tag()
+    headline()
     # calender()
     # scrape_m1()
     # scrape_m2()

@@ -28,8 +28,9 @@ def login():
             user = User(username=reg_form.username.data,email=reg_form.email.data,password=reg_form.password.data)
             user.save()
             login_user(user)
-            flash(f'Account created for {reg_form.username.data}.', 'success')
-            return redirect(url_for('users.show',username=user.username))
+            # flash(f'Account created for {reg_form.username.data}.', 'success')
+            flash('Please select your preferences, so we can start generating content for you.','primary')
+            return redirect(url_for('users.edit',id=user.id))
         elif log_form.submit_log.data and log_form.validate_on_submit():
             user = User.get_or_none(User.email == log_form.email.data)
             if user:

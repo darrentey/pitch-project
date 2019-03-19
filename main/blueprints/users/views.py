@@ -78,6 +78,10 @@ def update(id):
 def index():
     insta_tag = General.get(name='instagram').contents
     twitter_tag = General.get(name='twitter').contents
+    articles = General.get(name='headline').contents
+    headlines = []
+    for article in articles:
+        headlines.append(json.loads(article))
     results = []
     preferences = Preference.select()
     for preference in preferences:
@@ -86,7 +90,7 @@ def index():
             json_article['category']=preference.categories
             results.append(json_article)
     shuffle(results)
-    return render_template('carousel.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag)
+    return render_template('carousel.html',results=results,insta_tag=insta_tag,twitter_tag=twitter_tag,headlines=headlines)
 
 @users_blueprint.route("/users_preference") 
 def users_preference():

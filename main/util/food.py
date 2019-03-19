@@ -11,7 +11,7 @@ def scrape_fb1():
     for div in soup.find_all('div',class_='col-sm-4'):
         for img in div.find_all('img'):
             for a in div.find_all('h3'):
-                link = div.find('a')['href'],
+                link = div.find('a')['href']
                 # soup = BeautifulSoup(urlopen(link), 'html.parser')
                 # for meta in soup.find_all('meta', attrs={'name':'description'}):
                 #     desc = meta['content'],
@@ -44,16 +44,16 @@ def scrape_fb3():
     for div in soup.find_all('div', class_='col-xs-12 col-sm-6 col-md-6 item-post'):
         for img in div.find_all('img'):
             for a in div.find_all('a'):
-                link = a['href'],
-                title = div.find('div', class_='info_title').get_text(strip=True),
+                link = a['href']
+                title = div.find('div', class_='info_title').get_text(strip=True)
                 if link not in check:
-                        check.append(link),
-                        food_result.append(json.dumps({
-                                    'title':title,
-                                    'link':link,
-                                    'image':img.get('data-src'),
-                                    'desc':a.get_text(strip=True),
-                                }))
+                    check.append(link)
+                    food_result.append(json.dumps({
+                        'title':title,
+                        'link':link,
+                        'image':img.get('data-src'),
+                        'desc':a.get_text(strip=True)
+                    }))
 
 def scrape_fb4():
     soup = BeautifulSoup(urlopen('https://www.freemalaysiatoday.com/category/leisure/food'), 'html.parser')
@@ -63,11 +63,11 @@ def scrape_fb4():
             for a in div.find_all('a'):
                 link = a['href']
                 if link not in check:
-                    check.append(link),
+                    check.append(link)
                     food_result.append(json.dumps({
-                                    'title':a['title'],
-                                    'link':link,
-                                    'image':img.get('src'),
-                                    'desc':div.find('div', class_='td-excerpt').get_text(strip=True),
-                                }))
+                        'title':a['title'],
+                        'link':link,
+                        'image':img.get('src'),
+                        'desc':div.find('div', class_='td-excerpt').get_text(strip=True)
+                    }))
     print(food_result)

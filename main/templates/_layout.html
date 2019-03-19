@@ -122,7 +122,7 @@
 
             <ul class="navbar-nav">
               {% if current_user.is_authenticated %}              
-                <a class="nav-link" href="{{url_for('users.show',username=current_user.username)}}">Profile</a>
+                <a class="nav-link" href="{{url_for('users.show',username=current_user.username)}}">Feed</a>
                 <a class="nav-link" href="{{url_for('images.show')}}" >Images</a>
                 <a class="nav-link" href="{{url_for('users.edit',id=current_user.id)}}">Preference</a>
                 <a class="nav-link" href="{{url_for('marketings.show')}}">Tips</a>
